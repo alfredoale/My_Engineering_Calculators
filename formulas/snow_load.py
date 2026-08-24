@@ -34,6 +34,16 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
     steps = [
         {
             "step": 1,
+            "description": f"Look up ground snow load (S_s) and rain load (S_r) for {location}",
+            "formula_general": r"$$S_s, S_r = \text{Lookup}(\text{Location})$$",
+            "formula_substituted": rf"$$\text{{Location}} = \text{{{location}}} \implies S_s = {ss:.{p_ss}f}\text{{ kPa}}, \quad S_r = {sr:.{p_sr}f}\text{{ kPa}}$$",
+            "symbol": rf"S_s = {ss:.{p_ss}f}\text{{ kPa}}, \quad S_r",
+            "result": sr,
+            "precision": p_sr,
+            "units": "kPa"
+        },
+        {
+            "step": 2,
             "description": "Determine the basic roof snow-load factor",
             "formula_general": r"$$C_b = \begin{cases} 0.45 & \text{if } w \le 4.3\text{ m} \\ 0.55 & \text{if } w > 4.3\text{ m} \end{cases}$$",
             "formula_substituted": rf"$$C_b = {cb:.{p_cb}f} \quad \text{{(since }} w = {w:.{p_w}f}\text{{ m }} {cb_cond}\text{{)}}$$",
@@ -43,8 +53,8 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
             "units": ""
         },
         {
-            "step": 2,
-            "description": f"Calculate specified roof snow load ({location}: Ss = {ss:.{p_ss}f} kPa, Sr = {sr:.{p_sr}f} kPa)",
+            "step": 3,
+            "description": "Calculate specified roof snow load",
             "formula_general": r"$$S = C_b \times S_s + S_r$$",
             "formula_substituted": rf"$$S = {cb:.{p_cb}f} \times {ss:.{p_ss}f} + {sr:.{p_sr}f} = {calculated_s:.{p_s}f} \text{{ kPa}}$$",
             "symbol": "S",
@@ -53,7 +63,7 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
             "units": "kPa"
         },
         {
-            "step": 3,
+            "step": 4,
             "description": "Apply the minimum specified snow load",
             "formula_general": r"$$S = \max(C_b \times S_s + S_r, 1.0 \text{ kPa})$$",
             "formula_substituted": rf"$$S = \max({calculated_s:.{p_s}f} \text{{ kPa}}, 1.00 \text{{ kPa}}) = {final_s:.{p_s}f} \text{{ kPa}}$$",
