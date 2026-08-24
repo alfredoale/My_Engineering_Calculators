@@ -1,11 +1,22 @@
 from calculation import Calculation
+from data.obc_data import snow_rain_load_by_location
+
+# Extract location options list and build lookup dictionary
+LOCATION_OPTIONS = [item[0] for item in snow_rain_load_by_location]
+LOCATION_MAP = {
+    item[0]: {"Ss": float(item[1]), "Sr": float(item[2])}
+    for item in snow_rain_load_by_location
+}
 
 
 def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
-    """Executes OBC Part 9 Snow Load calculation steps."""
+    """Executes OBC Part 9 Snow Load calculation using location database lookup."""
+    location = str(inputs["Location"])
     w = float(inputs["w"])
-    ss = float(inputs["Ss"])
-    sr = float(inputs["Sr"])
+
+    loc_data = LOCATION_MAP.get(location, {"Ss": 0.0, "Sr": 0.0})
+    ss = loc_data["Ss"]
+    sr = loc_data["Sr"]
 
     p_w = precisions.get("w", 2)
     p_ss = precisions.get("Ss", 2)
@@ -33,7 +44,7 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
         },
         {
             "step": 2,
-            "description": "Calculate the specified roof snow load",
+            "description": f"Calculate specified roof snow load ({location}: Ss = {ss:.{p_ss}f} kPa, Sr = {sr:.{p_sr}f} kPa)",
             "formula_general": r"$$S = C_b \times S_s + S_r$$",
             "formula_substituted": rf"$$S = {cb:.{p_cb}f} \times {ss:.{p_ss}f} + {sr:.{p_sr}f} = {calculated_s:.{p_s}f} \text{{ kPa}}$$",
             "symbol": "S",
@@ -55,7 +66,7 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
 
     return {
         "main_result_latex": rf"$$S = {final_s:.{p_s}f}\text{{ kPa}}$$",
-        "results": {"S": final_s, "Cb": cb},
+        "results": {"S": final_s, "Cb": cb, "Ss": ss, "Sr": sr},
         "steps": steps
     }
 
@@ -63,16 +74,36 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
 snow_load_variables = [
     {"symbol": "S", "latex": "S", "name": "Specified snow load", "units": "kPa", "is_input": False},
     {"symbol": "Cb", "latex": "C_b", "name": "Basic roof snow-load factor", "units": "", "is_input": False},
-    {"symbol": "Ss", "latex": "S_s", "name": "Ground snow load", "units": "kPa", "is_input": True, "min": 0.0, "step": 0.1, "help": "Specified ground snow load."},
-    {"symbol": "Sr", "latex": "S_r", "name": "Rain load", "units": "kPa", "is_input": True, "min": 0.0, "step": 0.1, "help": "Associated rain load."},
-    {"symbol": "w", "latex": "w", "name": "Roof width", "units": "m", "is_input": True, "min": 0.1, "step": 0.1, "help": "Roof width."}
+    {"symbol": "Ss", "latex": "S_s", "name": "Ground snow load", "units": "kPa", "is_input": False},
+    {"symbol": "Sr", "latex": "S_r", "name": "Rain load", "units": "kPa", "is_input": False},
+    {
+        "symbol": "Location",
+        "latex": r"\text{Location}",
+        "name": "Municipality Location",
+        "units": "",
+        "is_input": True,
+        "widget": "selectbox",
+        "options": LOCATION_OPTIONS,
+        "default": LOCATION_OPTIONS[0],
+        "help": "Select the location to automatically look up Ss and Sr."
+    },
+    {
+        "symbol": "w",
+        "latex": "w",
+        "name": "Roof width",
+        "units": "m",
+        "is_input": True,
+        "min": 0.1,
+        "step": 0.1,
+        "help": "Roof width."
+    }
 ]
 
 snow_load_map_url = "https://www.google.com/maps/d/viewer?mid=1rOmkZ8IGp56MVXm2q9rcsw5Rxq8ErC0&femb=1&ll=48.278889463158336%2C-84.54679069999999&z=5"
 snow_load_notes = (
     "**General Calculation Notes:**\n"
     "- Specified snow load calculations conform to **OBC Part 9 (Section 9.23.11.7)**.\n"
-    "- Ground snow load ($S_s$) and rain load ($S_r$) must be obtained for the specific municipality or location.\n"
+    "- Ground snow load ($S_s$) and rain load ($S_r$) are automatically populated based on the selected municipality.\n"
     "- The minimum specified roof snow load ($S$) is set at $1.0\\text{ kPa}$ as per OBC requirements."
 )
 
