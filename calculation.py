@@ -16,7 +16,7 @@ def format_unit_latex(unit_str: str) -> str:
 class Calculation:
     """
     Generic calculation model and UI runner for engineering calculations.
-    Encapsulates variable definitions, execution logic, rendering, and variable linking.
+    Encapsulates variable definitions, execution logic, persistence, and rendering.
     """
 
     def __init__(
@@ -38,175 +38,311 @@ class Calculation:
         self.reference_link = reference_link  # Tuple format: ("Button Label", "URL")
 
     def calculate(self, inputs: dict, precisions: dict) -> dict:
-        """Executes the core engineering logic."""
+        """Executes the core engineering logic using supplied inputs and precisions."""
         return self.calculate_fn(inputs, precisions)
 
-    def initialize_session_state(self):
-        """Initializes default values in Streamlit session state for this calculation."""
-        for var in self.variables:
-            if var.get("is_input", False):
-                key = f"input_{self.calc_id}_{var['symbol']}"
-                widget_type = var.get("widget", var.get("type", "number_input")).lower()
-                opts = var.get("options", [])
+    def initialize_session_state(self, instance_id: str, calc_data_store: dict):
+        """
+        Initializes default values in persistent state store for a specific calculator instance.
+        """
+        if instance_id not in calc_data_store:
+            calc_data_store[instance_id] = {
+                "inputs": {},
+                "linked": {},
+                "link_select": {},
+                "precisions": {},
+                "notes": ""
+            }
 
-                if key not in st.session_state:
+        inst_data = calc_data_store[instance_id]
+
+        for var in self.variables:
+            symbol = var["symbol"]
+            widget_type = var.get("widget", var.get("type", "number_input")).lower()
+            opts = var.get("options", [])
+
+            if var.get("is_input", False):
+                if symbol not in inst_data["inputs"]:
                     if widget_type == "slider":
                         min_v = float(var.get("min", 0.0))
                         default_v = float(var.get("default", min_v))
-                        st.session_state[key] = default_v
+                        inst_data["inputs"][symbol] = default_v
                     elif widget_type in ("selectbox", "radio", "select_slider", "pills", "spills"):
                         default_v = var.get("default", opts[0] if opts else None)
-                        st.session_state[key] = default_v
+                        inst_data["inputs"][symbol] = default_v
                     elif widget_type == "multiselect":
                         default_v = var.get("default", [])
-                        st.session_state[key] = default_v
+                        inst_data["inputs"][symbol] = default_v
                     elif widget_type in ("checkbox", "toggle"):
                         default_v = bool(var.get("default", False))
-                        st.session_state[key] = default_v
+                        inst_data["inputs"][symbol] = default_v
                     else:
-                        st.session_state[key] = var.get("default", None)
+                        min_v = float(var["min"]) if "min" in var and var["min"] is not None else None
+                        try:
+                            default_v = float(var.get("default", 0.0))
+                        except (ValueError, TypeError):
+                            default_v = min_v if min_v is not None else 0.0
+                        if min_v is not None and default_v < min_v:
+                            default_v = min_v
+                        inst_data["inputs"][symbol] = default_v
 
-            prec_key = f"prec_{self.calc_id}_{var['symbol']}"
-            if prec_key not in st.session_state:
-                st.session_state[prec_key] = 2
+            if symbol not in inst_data["precisions"]:
+                inst_data["precisions"][symbol] = 2
 
-        notes_key = f"notes_{self.calc_id}"
-        if notes_key not in st.session_state:
-            st.session_state[notes_key] = ""
+            if symbol not in inst_data["linked"]:
+                inst_data["linked"][symbol] = False
 
-    def render_sidebar_inputs(self, available_vars: dict, is_multi_calc: bool = False) -> Tuple[dict, dict]:
+    def render_sidebar_inputs(
+        self, 
+        instance_id: str, 
+        instance_label: str, 
+        available_vars: list, 
+        calc_data_store: dict
+    ) -> dict:
         """
-        Renders input controls for this calculator inside the sidebar.
-        Supports linking ALL inputs to available variables from other active calculators.
-        Returns tuple of (inputs_dict, linked_info_dict).
+        Renders input controls for this calculator instance inside the sidebar.
+        Renders the main input control first, followed below by the variable linking controls.
         """
-        inputs = {}
-        linked_info = {}
+        inst_data = calc_data_store[instance_id]
+        resolved_inputs = {}
 
         for var in self.variables:
-            if var.get("is_input", False):
-                symbol = var["symbol"]
-                base_help = var.get("help", var["name"])
-                help_text = f"{base_help} In {var['units']}." if var.get("units") else base_help
+            if not var.get("is_input", False):
+                continue
 
-                # 1. Render input widget control first
-                key = f"input_{self.calc_id}_{symbol}"
-                widget_type = var.get("widget", var.get("type", "number_input")).lower()
-                opts = var.get("options", [])
+            symbol = var["symbol"]
+            widget_type = var.get("widget", var.get("type", "number_input")).lower()
+            opts = var.get("options", [])
+            var_units = var.get("units", "").strip()
 
-                if widget_type == "slider":
-                    min_v = float(var.get("min", 0.0))
-                    max_v = float(var.get("max", 100.0))
-                    step_v = float(var.get("step", 1.0))
-                    val = st.sidebar.slider(
-                        label=f"{symbol} ({var['name']})",
-                        min_value=min_v,
-                        max_value=max_v,
-                        step=step_v,
-                        help=help_text,
-                        key=key
-                    )
-                elif widget_type == "selectbox":
-                    val = st.sidebar.selectbox(
-                        label=f"{symbol} ({var['name']})",
-                        options=opts,
-                        help=help_text,
-                        key=key
-                    )
-                elif widget_type == "checkbox":
-                    val = st.sidebar.checkbox(
-                        label=f"{symbol} ({var['name']})",
-                        help=help_text,
-                        key=key
-                    )
-                elif widget_type == "toggle":
-                    val = st.sidebar.toggle(
-                        label=f"{symbol} ({var['name']})",
-                        help=help_text,
-                        key=key
-                    )
+            base_help = var.get("help", var["name"])
+            help_text = f"{base_help} In {var_units}." if var_units else base_help
+
+            # Label always displays units beside symbol if present
+            widget_label = f"{symbol} [{var_units}] ({var['name']})" if var_units else f"{symbol} ({var['name']})"
+
+            # Linking is strictly supported for numeric inputs (number_input and slider)
+            supports_linking = widget_type in ("number_input", "slider")
+
+            toggle_key = f"toggle_link_{instance_id}_{symbol}"
+            select_key = f"select_link_{instance_id}_{symbol}"
+            input_key = f"input_{instance_id}_{symbol}"
+
+            matching_candidates = []
+            is_linked = False
+            linked_value = None
+
+            if supports_linking:
+                # Filter matching candidate variables from other active instances
+                matching_candidates = [
+                    v for v in available_vars 
+                    if v["instance_id"] != instance_id  # Exclude self
+                    and v["unit"].strip() == var_units   # Match units strictly
+                ]
+                has_candidates = len(matching_candidates) > 0
+
+                # Pre-evaluate toggle link status from session state
+                if toggle_key in st.session_state:
+                    is_linked = bool(st.session_state[toggle_key]) and has_candidates
                 else:
-                    # Default: number_input
-                    min_v = float(var["min"]) if "min" in var else None
-                    max_v = float(var["max"]) if "max" in var else None
-                    step_v = float(var["step"]) if "step" in var else None
-                    val = st.sidebar.number_input(
-                        label=f"{symbol} ({var['name']})",
-                        min_value=min_v,
-                        max_value=max_v,
-                        step=step_v,
-                        help=help_text,
-                        key=key
+                    is_linked = bool(inst_data["linked"].get(symbol, False)) and has_candidates
+
+                inst_data["linked"][symbol] = is_linked
+
+                # Determine selected linked variable value
+                candidate_options = [v["id"] for v in matching_candidates]
+                current_link_id = st.session_state.get(select_key, inst_data["link_select"].get(symbol))
+
+                if is_linked and current_link_id:
+                    selected_var = next((v for v in matching_candidates if v["id"] == current_link_id), None)
+                    if selected_var is not None:
+                        linked_value = selected_var["value"]
+            else:
+                inst_data["linked"][symbol] = False
+
+            # Determine default bounds and values
+            if widget_type in ("number_input", "slider"):
+                min_v = float(var["min"]) if "min" in var and var["min"] is not None else None
+                max_v = float(var["max"]) if "max" in var and var["max"] is not None else None
+                step_v = float(var["step"]) if "step" in var and var["step"] is not None else None
+
+                try:
+                    fallback_def = float(var.get("default", 0.0))
+                except (ValueError, TypeError):
+                    fallback_def = min_v if min_v is not None else 0.0
+
+                if min_v is not None and fallback_def < min_v:
+                    fallback_def = min_v
+
+                current_input_val = inst_data["inputs"].get(symbol, fallback_def)
+                if is_linked and linked_value is not None:
+                    current_input_val = linked_value
+            else:
+                min_v, max_v, step_v = None, None, None
+                fallback_def = var.get(
+                    "default",
+                    opts[0] if opts else (False if widget_type in ("checkbox", "toggle") else [] if widget_type == "multiselect" else None)
+                )
+                current_input_val = inst_data["inputs"].get(symbol, fallback_def)
+
+            if widget_type == "slider":
+                slider_min = float(var.get("min", 0.0))
+                slider_max = float(var.get("max", 100.0))
+                slider_step = float(var.get("step", 1.0))
+                try:
+                    slider_val = float(current_input_val) if current_input_val is not None else slider_min
+                except (ValueError, TypeError):
+                    slider_val = slider_min
+                if slider_val < slider_min:
+                    slider_val = slider_min
+                if slider_val > slider_max:
+                    slider_val = slider_max
+
+                val = st.sidebar.slider(
+                    label=widget_label,
+                    min_value=slider_min,
+                    max_value=slider_max,
+                    value=slider_val,
+                    step=slider_step,
+                    help=help_text,
+                    key=input_key,
+                    disabled=is_linked
+                )
+            elif widget_type == "selectbox":
+                default_idx = opts.index(current_input_val) if current_input_val in opts else 0
+                val = st.sidebar.selectbox(
+                    label=widget_label,
+                    options=opts,
+                    index=default_idx,
+                    help=help_text,
+                    key=input_key,
+                    disabled=is_linked
+                )
+            elif widget_type == "multiselect":
+                default_sel = current_input_val if isinstance(current_input_val, list) else []
+                val = st.sidebar.multiselect(
+                    label=widget_label,
+                    options=opts,
+                    default=default_sel,
+                    help=help_text,
+                    key=input_key,
+                    disabled=is_linked
+                )
+            elif widget_type in ("checkbox", "toggle"):
+                val = st.sidebar.checkbox(
+                    label=widget_label,
+                    value=bool(current_input_val),
+                    help=help_text,
+                    key=input_key,
+                    disabled=is_linked
+                )
+            else:
+                # Default to number_input
+                try:
+                    num_val = float(current_input_val) if current_input_val is not None else (min_v if min_v is not None else 0.0)
+                except (ValueError, TypeError):
+                    num_val = min_v if min_v is not None else 0.0
+
+                if min_v is not None and num_val < min_v:
+                    num_val = min_v
+                if max_v is not None and num_val > max_v:
+                    num_val = max_v
+                
+                val = st.sidebar.number_input(
+                    label=widget_label,
+                    min_value=min_v,
+                    max_value=max_v,
+                    value=num_val,
+                    step=step_v,
+                    help=help_text,
+                    key=input_key,
+                    disabled=is_linked
+                )
+
+            if supports_linking:
+                col_t, col_s = st.sidebar.columns([1, 2])
+                has_candidates = len(matching_candidates) > 0
+
+                with col_t:
+                    toggle_val = st.toggle(
+                        "Link",
+                        value=is_linked,
+                        disabled=not has_candidates,
+                        key=toggle_key,
+                        help="Link this input to a calculated or input variable from another active calculator." if has_candidates else "No available variables with matching units to link."
                     )
+                    is_linked = toggle_val and has_candidates
+                    inst_data["linked"][symbol] = is_linked
 
-                # 2. Render link option below the input control
-                link_key = f"use_link_{self.calc_id}_{symbol}"
-                select_link_key = f"select_link_{self.calc_id}_{symbol}"
+                with col_s:
+                    candidate_options = [v["id"] for v in matching_candidates]
+                    candidate_map = {v["id"]: v["display"] for v in matching_candidates}
 
-                use_link = False
-                if is_multi_calc or available_vars:
-                    use_link = st.sidebar.checkbox(
-                        "Link to another variable",
-                        key=link_key
+                    current_link_id = inst_data["link_select"].get(symbol)
+                    default_idx = candidate_options.index(current_link_id) if current_link_id in candidate_options else 0
+
+                    selected_link_id = st.selectbox(
+                        "Linked Variable",
+                        options=candidate_options,
+                        index=default_idx if candidate_options else None,
+                        format_func=lambda x: candidate_map.get(x, x),
+                        disabled=not is_linked,
+                        key=select_key,
+                        label_visibility="collapsed"
                     )
+                    inst_data["link_select"][symbol] = selected_link_id
 
-                if use_link:
-                    if available_vars:
-                        options_keys = list(available_vars.keys())
-                        selected_key = st.sidebar.selectbox(
-                            label=f"Select source variable for {symbol} ({var['name']})",
-                            options=options_keys,
-                            format_func=lambda k: available_vars[k]["label"],
-                            key=select_link_key
-                        )
+                    if is_linked and selected_link_id:
+                        selected_var = next((v for v in matching_candidates if v["id"] == selected_link_id), None)
+                        if selected_var is not None:
+                            linked_value = selected_var["value"]
 
-                        source_var = available_vars[selected_key]
-                        val_linked = source_var["value"]
-                        st.sidebar.caption(
-                            f"**Linked Value:** {val_linked} {var.get('units', '')}  \n"
-                            f"*Source: {source_var['calc_title']} ({source_var['symbol']} - {source_var['name']})*"
-                        )
-                        inputs[symbol] = val_linked
-                        linked_info[symbol] = source_var
-                    else:
-                        st.sidebar.caption("⚠️ No active source variables available to link from other calculators yet.")
-                        inputs[symbol] = None
-                else:
-                    inputs[symbol] = val
+            # Store resolved value
+            if is_linked and linked_value is not None:
+                resolved_inputs[symbol] = linked_value
+            else:
+                resolved_inputs[symbol] = val
+                inst_data["inputs"][symbol] = val
 
-        return inputs, linked_info
+        return resolved_inputs
 
-    def render_sidebar_precisions(self) -> dict:
-        """Renders precision controls for this calculator."""
+    def render_sidebar_precisions(self, instance_id: str, calc_data_store: dict) -> dict:
+        """Renders decimal precision sliders for each variable in this calculator instance."""
+        inst_data = calc_data_store[instance_id]
         precisions = {}
+
         for var in self.variables:
-            prec_key = f"prec_{self.calc_id}_{var['symbol']}"
+            sym = var["symbol"]
+            prec_key = f"prec_{instance_id}_{sym}"
+            default_p = inst_data["precisions"].get(sym, 2)
+
             p_val = st.number_input(
-                label=f"{var['symbol']} ({var['name']})",
+                label=f"{sym} ({var['name']})",
                 min_value=0,
                 max_value=6,
-                value=st.session_state.get(prec_key, 2),
+                value=default_p,
                 step=1,
                 key=prec_key
             )
-            precisions[var["symbol"]] = p_val
+            inst_data["precisions"][sym] = p_val
+            precisions[sym] = p_val
+
         return precisions
 
     def render_main_canvas(self, config: dict):
-        """Executes calculation and renders outputs on the main canvas inside its assigned tab."""
-        st.subheader(self.title)
+        """Executes calculation logic and renders clean LaTeX step-by-step outputs on the main canvas."""
+        st.subheader(f"{self.title} - {config['instance_label']}")
         st.markdown(self.subtitle)
 
         if config["uploaded_image"] is not None:
-            st.image(config["uploaded_image"], caption=f"{self.title} - Reference Image", use_container_width=True)
+            st.image(config["uploaded_image"], caption=f"{self.title} ({config['instance_label']}) Reference Image", use_container_width=True)
 
         inputs = config["inputs"]
         precisions = config["precisions"]
 
-        # Ensure all required inputs have a valid non-None value
         missing_inputs = [
             var["symbol"] for var in self.variables
-            if var.get("is_input", False) and inputs[var["symbol"]] is None
+            if var.get("is_input", False) and inputs.get(var["symbol"]) is None
         ]
 
         if missing_inputs:
@@ -214,55 +350,48 @@ class Calculation:
             return
 
         try:
-            # Execute calculation function
             result = self.calculate(inputs=inputs, precisions=precisions)
 
-            # Display Given Parameters
             st.subheader("Given")
             for var in self.variables:
                 if var.get("is_input", False):
                     val = inputs[var["symbol"]]
                     p = precisions.get(var["symbol"], 2)
-                    unit_str = format_unit_latex(var["units"])
+                    unit_str = format_unit_latex(var.get("units", ""))
 
                     if isinstance(val, (int, float)) and not isinstance(val, bool):
                         st.markdown(rf"$${var['latex']} = {val:.{p}f}{unit_str}$$")
                     else:
                         st.markdown(rf"$${var['latex']} = \text{{{val}}}{unit_str}$$")
 
-            # Display Main Result
             st.subheader("We get")
             st.markdown(result["main_result_latex"])
             st.divider()
 
-            # Display Step-by-Step Calculation Steps
             if config["show_steps"]:
                 st.subheader("Calculation Steps")
-                for step in result["steps"]:
+                for step in result.get("steps", []):
                     st.markdown(f"**Step {step['step']}: {step['description']}**")
-
                     st.caption("General Formula:")
                     st.markdown(step["formula_general"])
-
                     st.caption("Substituted Values:")
                     st.markdown(step["formula_substituted"])
 
-                    p_res = step["precision"]
-                    unit_str = format_unit_latex(step["units"])
+                    p_res = step.get("precision", 2)
+                    unit_str = format_unit_latex(step.get("units", ""))
                     st.markdown(rf"$${step['symbol']} = {step['result']:.{p_res}f}{unit_str}$$")
                     st.divider()
 
-            # Variables Reference
             st.subheader("Variables Reference")
             for var in self.variables:
-                if var["units"]:
-                    cleaned_u = var["units"].replace("·", r"}\cdot\text{").replace(r"\cdotp", r"}\cdot\text{")
+                var_u = var.get("units", "")
+                if var_u:
+                    cleaned_u = var_u.replace("·", r"}\cdot\text{").replace(r"\cdotp", r"}\cdot\text{")
                     unit_display = rf" \text{{ ({cleaned_u})}}"
                 else:
                     unit_display = ""
                 st.markdown(rf"$${var['latex']} = \text{{{var['name']}}}{unit_display}$$")
 
-            # Notes and Reference Links
             st.divider()
             st.subheader("Notes")
 
@@ -278,66 +407,3 @@ class Calculation:
 
         except Exception as e:
             st.error(f"Calculation Error: {e}")
-
-
-def get_available_variables(active_calculators: List[Calculation], current_calc_id: str, precisions: dict) -> dict:
-    """
-    Collects inputs and calculated outputs from other active calculators from session state so they can be referenced/linked.
-    Formats options as: "[Calc Title] Symbol — Name: Value Unit"
-    """
-    available = {}
-    for calc in active_calculators:
-        if calc.calc_id == current_calc_id:
-            continue
-
-        c_precs = precisions.get(calc.calc_id, {})
-        c_inputs = {}
-
-        # 1. Available Input Variables from other active calculators
-        for var in calc.variables:
-            if var.get("is_input", False):
-                val = st.session_state.get(f"input_{calc.calc_id}_{var['symbol']}")
-                c_inputs[var["symbol"]] = val
-                if val is not None and isinstance(val, (int, float)) and not isinstance(val, bool):
-                    p = c_precs.get(var["symbol"], 2)
-                    unit_str = f" {var['units']}" if var.get("units") else ""
-                    key = f"{calc.calc_id}.{var['symbol']}"
-                    label = f"[{calc.title}] {var['symbol']} — {var['name']}: {val:.{p}f}{unit_str}"
-                    available[key] = {
-                        "label": label,
-                        "value": float(val),
-                        "symbol": var["symbol"],
-                        "name": var["name"],
-                        "units": var.get("units", ""),
-                        "calc_title": calc.title
-                    }
-
-        # 2. Available Calculated Output Variables from other active calculators
-        missing_inputs = [
-            v["symbol"] for v in calc.variables
-            if v.get("is_input", False) and c_inputs.get(v["symbol"]) is None
-        ]
-        if not missing_inputs:
-            try:
-                res = calc.calculate(inputs=c_inputs, precisions=c_precs)
-                results_dict = res.get("results", {})
-                for var in calc.variables:
-                    if not var.get("is_input", False) and var["symbol"] in results_dict:
-                        val = results_dict[var["symbol"]]
-                        if val is not None and isinstance(val, (int, float)) and not isinstance(val, bool):
-                            p = c_precs.get(var["symbol"], 2)
-                            unit_str = f" {var['units']}" if var.get("units") else ""
-                            key = f"{calc.calc_id}.{var['symbol']}"
-                            label = f"[{calc.title}] {var['symbol']} — {var['name']}: {val:.{p}f}{unit_str}"
-                            available[key] = {
-                                "label": label,
-                                "value": float(val),
-                                "symbol": var["symbol"],
-                                "name": var["name"],
-                                "units": var.get("units", ""),
-                                "calc_title": calc.title
-                            }
-            except Exception:
-                pass
-
-    return available
