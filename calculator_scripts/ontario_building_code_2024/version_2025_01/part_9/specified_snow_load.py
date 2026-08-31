@@ -1,10 +1,24 @@
+import json
+from pathlib import Path
+
 from core.calculator_model import Calculation
-from data.obc_data import snow_rain_load_by_location
+
+DATA_FILE = (
+    Path(__file__).resolve().parents[4]
+    / "data"
+    / "ontario_building_code_2024"
+    / "version_2025_01"
+    / "sb1_climatic_and_seismic_data"
+    / "climatic_design_data_snow_load.json"
+)
+
+with DATA_FILE.open("r", encoding="utf-8") as f:
+    snow_rain_load_by_location = json.load(f)
 
 # Extract location options list and build lookup dictionary
-LOCATION_OPTIONS = [item[0] for item in snow_rain_load_by_location]
+LOCATION_OPTIONS = [item["location"] for item in snow_rain_load_by_location]
 LOCATION_MAP = {
-    item[0]: {"Ss": float(item[1]), "Sr": float(item[2])}
+    item["location"]: {"Ss": float(item["Ss"]), "Sr": float(item["Sr"])}
     for item in snow_rain_load_by_location
 }
 

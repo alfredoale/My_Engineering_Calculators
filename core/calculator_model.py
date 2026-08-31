@@ -331,8 +331,9 @@ class Calculation:
 
     def render_main_canvas(self, config: dict):
         """Executes calculation logic and renders clean LaTeX step-by-step outputs on the main canvas."""
-        st.subheader(f"{self.title} - {config['instance_label']}")
+        st.title(self.title)
         st.markdown(self.subtitle)
+        st.caption(config["instance_label"])
 
         if config["uploaded_image"] is not None:
             st.image(config["uploaded_image"], caption=f"{self.title} ({config['instance_label']}) Reference Image", use_container_width=True)

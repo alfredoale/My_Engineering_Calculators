@@ -1,6 +1,6 @@
 import uuid
 import streamlit as st
-from formulas import CALCULATORS
+from calculator_scripts import CALCULATORS
 
 
 def gather_available_variables(active_instances: list, calc_data_store: dict) -> list:
@@ -231,14 +231,14 @@ def main():
 
     st.sidebar.subheader("4. Reference Image")
     calc_image = st.sidebar.file_uploader(
-        f"Image for {selected_inst['label']}",
+        "Upload image",
         type=["png", "jpg", "jpeg"],
         key=f"img_{selected_inst_id}"
     )
 
     st.sidebar.subheader("5. Notes")
     note_val = st.sidebar.text_area(
-        f"Notes for {selected_inst['label']}",
+        "Notes",
         value=calc_data_store[selected_inst_id].get("notes", ""),
         key=f"textarea_{selected_inst_id}"
     )

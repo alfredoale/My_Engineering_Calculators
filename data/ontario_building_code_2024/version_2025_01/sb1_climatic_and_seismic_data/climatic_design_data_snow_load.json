@@ -1,0 +1,1400 @@
+[
+  {
+    "location": "Ailsa Craig",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Ajax",
+    "Ss": 1.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Alexandria",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Alliston",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Almonte",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Armstrong",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Arnprior",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Atikokan",
+    "Ss": 2.4,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Attawapiskat",
+    "Ss": 2.8,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Aurora",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Bancroft",
+    "Ss": 3.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Barrie",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Barriefield",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Beaverton",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Belleville",
+    "Ss": 1.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Belmont",
+    "Ss": 1.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Big Trout Lake (Kitchenuhmaykoosib)",
+    "Ss": 3.2,
+    "Sr": 0.2,
+    "unit": "kPa"
+  },
+  {
+    "location": "CFB Borden",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Bracebridge",
+    "Ss": 3.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Bradford",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Brampton",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Brantford",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Brighton",
+    "Ss": 1.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Brockville",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Burk's Falls",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Burlington",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Cambridge",
+    "Ss": 1.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Campbellford",
+    "Ss": 1.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Cannington",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Carleton Place",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Cavan",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Centralia",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Chapleau",
+    "Ss": 3.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Chatham",
+    "Ss": 1.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Chesley",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Clinton",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Coboconk",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Cobourg",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Cochrane",
+    "Ss": 2.8,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Colborne",
+    "Ss": 1.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Collingwood",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Cornwall",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Corunna",
+    "Ss": 1.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Deep River",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Deseronto",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Dorchester",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Dorion",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Dresden",
+    "Ss": 1.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Dryden",
+    "Ss": 2.4,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Dundalk",
+    "Ss": 3.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Dunnville",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Durham",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Dutton",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Earlton",
+    "Ss": 3.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Edison",
+    "Ss": 2.4,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Elliot Lake",
+    "Ss": 2.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Elmvale",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Embro",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Englehart",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Espanola",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Exeter",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Fenelon Falls",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Fergus",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Forest",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Fort Erie",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Fort Erie (Ridgeway)",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Fort Frances",
+    "Ss": 2.3,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Gananoque",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Geraldton",
+    "Ss": 2.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Glencoe",
+    "Ss": 1.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Goderich",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Gore Bay",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Graham",
+    "Ss": 2.6,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Gravenhurst (Muskoka Airport)",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Grimsby",
+    "Ss": 0.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Guelph",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Guthrie",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Haileybury",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Haldimand (Caledonia)",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Haldimand (Hagersville)",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Haliburton",
+    "Ss": 2.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Halton Hills (Georgetown)",
+    "Ss": 1.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hamilton - Above Escarpment West of John C. Munro Int'l Airport",
+    "Ss": 1.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hamilton - Above Escarpment East of John C. Munro Int'l Airport",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hamilton - Below Escarpment West of Highway 403",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hamilton - Below Escarpment East of Highway 403",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hanover",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hastings",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hawkesbury",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hearst",
+    "Ss": 2.8,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Honey Harbour",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Hornepayne",
+    "Ss": 3.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Huntsville",
+    "Ss": 2.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Ingersoll",
+    "Ss": 1.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Iroquois Falls",
+    "Ss": 2.9,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Jellicoe",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kapuskasing",
+    "Ss": 3.0,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kemptville",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kenora",
+    "Ss": 2.5,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Killaloe",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kincardine",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kingston",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kinmount",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kirkland Lake",
+    "Ss": 2.9,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Kitchener",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Lakefield",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Lansdowne House",
+    "Ss": 3.0,
+    "Sr": 0.2,
+    "unit": "kPa"
+  },
+  {
+    "location": "Leamington",
+    "Ss": 0.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Lindsay",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Lion's Head",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Listowel",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "London",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Lucan",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Maitland",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Markdale",
+    "Ss": 3.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Markham",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Martin",
+    "Ss": 2.6,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Matheson",
+    "Ss": 2.8,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Mattawa",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Midland",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Milton",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Milverton",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Minden",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Mississauga",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Mississauga (Lester B. Pearson International Airport)",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Mississauga (Port Credit)",
+    "Ss": 0.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Mitchell",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Moosonee",
+    "Ss": 2.7,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Morrisburg",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Mount Forest",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Nakina",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Nanticoke (Jarvis)",
+    "Ss": 1.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Nanticoke (Port Dover)",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Napanee",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "New Liskeard",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Newcastle",
+    "Ss": 1.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Newcastle (Bowmanville)",
+    "Ss": 1.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Newmarket",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Niagara Falls",
+    "Ss": 1.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "North Bay",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Norwood",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Oakville",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Orangeville",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Orillia",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Oshawa",
+    "Ss": 1.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Ottawa (City Hall)",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Ottawa (Barrhaven)",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Ottawa (Kanata)",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Ottawa (MacDonald-Cartier Int'l Airport)",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Ottawa (Orleans)",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Owen Sound",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Pagwa River",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Paris",
+    "Ss": 1.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Parkhill",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Parry Sound",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Pelham (Fonthill)",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Pembroke",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Penetanguishene",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Perth",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Petawawa",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Peterborough",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Petrolia",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Pickering (Dunbarton)",
+    "Ss": 1.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Picton",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Plattsville",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Point Alexander",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Port Burwell",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Port Colborne",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Port Elgin",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Port Hope",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Port Perry",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Port Stanley",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Prescott",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Princeton",
+    "Ss": 1.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Raith",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Rayside-Balfour (Chelmsford)",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Red Lake",
+    "Ss": 2.6,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Renfrew",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Richmond Hill",
+    "Ss": 1.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Rockland",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Sarnia",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Sault Ste. Marie",
+    "Ss": 3.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Schreiber",
+    "Ss": 3.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Seaforth",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Shelburne",
+    "Ss": 3.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Simcoe",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Sioux Lookout",
+    "Ss": 2.6,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Smiths Falls",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Smithville",
+    "Ss": 1.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Smooth Rock Falls",
+    "Ss": 2.7,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "South River",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Southampton",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "St. Catharines",
+    "Ss": 1.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "St. Mary's",
+    "Ss": 2.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "St. Thomas",
+    "Ss": 1.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Stirling",
+    "Ss": 1.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Stratford",
+    "Ss": 2.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Strathroy",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Sturgeon Falls",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Sudbury",
+    "Ss": 2.5,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Sundridge",
+    "Ss": 2.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Tavistock",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Temagami",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Thamesford",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Thedford",
+    "Ss": 2.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Thunder Bay",
+    "Ss": 2.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Tillsonburg",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Timmins",
+    "Ss": 3.1,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Timmins (Porcupine)",
+    "Ss": 2.9,
+    "Sr": 0.3,
+    "unit": "kPa"
+  },
+  {
+    "location": "Toronto Metropolitan Region - Etobicoke",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Toronto Metropolitan Region - North York",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Toronto Metropolitan Region - Scarborough",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Toronto Metropolitan Region - Toronto (City Hall)",
+    "Ss": 0.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Trenton",
+    "Ss": 1.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Trout Creek",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Uxbridge",
+    "Ss": 2.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Vaughan (Woodbridge)",
+    "Ss": 1.1,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Vittoria",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Walkerton",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Wallaceburg",
+    "Ss": 0.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Waterloo",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Watford",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Wawa",
+    "Ss": 3.4,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Welland",
+    "Ss": 2.0,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "West Lorne",
+    "Ss": 1.3,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Whitby",
+    "Ss": 1.2,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Whitby (Brooklin)",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "White River",
+    "Ss": 3.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Wiarton",
+    "Ss": 2.7,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Windsor",
+    "Ss": 0.8,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Wingham",
+    "Ss": 2.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Woodstock",
+    "Ss": 1.9,
+    "Sr": 0.4,
+    "unit": "kPa"
+  },
+  {
+    "location": "Wyoming",
+    "Ss": 1.6,
+    "Sr": 0.4,
+    "unit": "kPa"
+  }
+]
