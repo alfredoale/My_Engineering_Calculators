@@ -1,4 +1,4 @@
-from calculation import Calculation
+from core.calculator_model import Calculation
 from data.obc_data import snow_rain_load_by_location
 
 # Extract location options list and build lookup dictionary

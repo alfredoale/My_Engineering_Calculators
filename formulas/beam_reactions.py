@@ -1,4 +1,4 @@
-from calculation import Calculation
+from core.calculator_model import Calculation
 
 
 def calculate_beam_reactions(inputs: dict, precisions: dict) -> dict:
