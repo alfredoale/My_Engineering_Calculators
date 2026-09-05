@@ -23,6 +23,12 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
     """
     available_vars = []
 
+    def is_missing(value) -> bool:
+        """Treat null, blank text, and empty collections as incomplete."""
+        return value is None or value == "" or (
+            isinstance(value, (list, tuple, set)) and not value
+        )
+
     # Expose only unlinked inputs; linked inputs are supplied by another source.
     for instance in active_instances:
         inst_id = instance["instance_id"]
@@ -43,7 +49,9 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
                 if linked.get(sym, False):
                     continue
 
-                val = inputs.get(sym, var.get("default", 0.0))
+                val = inputs.get(sym)
+                if is_missing(val):
+                    continue
                 p = precisions.get(sym, 2)
                 val_formatted = f"{val:.{p}f}" if isinstance(val, (int, float)) and not isinstance(val, bool) else str(val)
                 unit_str = var.get("units", "")
@@ -80,6 +88,12 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
                     linked_var = next((v for v in available_vars if v["id"] == linked_id), None)
                     if linked_var and linked_var["value"] is not None:
                         inputs[sym] = linked_var["value"]
+
+        if any(
+            var.get("is_input", False) and is_missing(inputs.get(var["symbol"]))
+            for var in calc.variables
+        ):
+            continue
 
         try:
             res = calc.calculate(inputs=inputs, precisions=precisions)

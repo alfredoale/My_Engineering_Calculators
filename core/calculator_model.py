@@ -52,7 +52,7 @@ class Calculation:
 
     def initialize_session_state(self, instance_id: str, calc_data_store: dict):
         """
-        Initializes default values in persistent state store for a specific calculator instance.
+        Initialize persistent state for a calculator instance without populating inputs.
         """
         if instance_id not in calc_data_store:
             calc_data_store[instance_id] = {
@@ -72,28 +72,14 @@ class Calculation:
 
             if var.get("is_input", False):
                 if symbol not in inst_data["inputs"]:
-                    if widget_type == "slider":
-                        min_v = float(var.get("min", 0.0))
-                        default_v = float(var.get("default", min_v))
-                        inst_data["inputs"][symbol] = default_v
-                    elif widget_type in ("selectbox", "radio", "select_slider", "pills", "spills"):
-                        default_v = var.get("default", opts[0] if opts else None)
-                        inst_data["inputs"][symbol] = default_v
+                    if widget_type in ("selectbox", "radio", "select_slider", "pills", "spills", "slider"):
+                        inst_data["inputs"][symbol] = None
                     elif widget_type == "multiselect":
-                        default_v = var.get("default", [])
-                        inst_data["inputs"][symbol] = default_v
+                        inst_data["inputs"][symbol] = []
                     elif widget_type in ("checkbox", "toggle"):
-                        default_v = bool(var.get("default", False))
-                        inst_data["inputs"][symbol] = default_v
+                        inst_data["inputs"][symbol] = False
                     else:
-                        min_v = float(var["min"]) if "min" in var and var["min"] is not None else None
-                        try:
-                            default_v = float(var.get("default", 0.0))
-                        except (ValueError, TypeError):
-                            default_v = min_v if min_v is not None else 0.0
-                        if min_v is not None and default_v < min_v:
-                            default_v = min_v
-                        inst_data["inputs"][symbol] = default_v
+                        inst_data["inputs"][symbol] = None
 
             if symbol not in inst_data["precisions"]:
                 inst_data["precisions"][symbol] = 2
@@ -181,24 +167,12 @@ class Calculation:
                 max_v = float(var["max"]) if "max" in var and var["max"] is not None else None
                 step_v = float(var["step"]) if "step" in var and var["step"] is not None else None
 
-                try:
-                    fallback_def = float(var.get("default", 0.0))
-                except (ValueError, TypeError):
-                    fallback_def = min_v if min_v is not None else 0.0
-
-                if min_v is not None and fallback_def < min_v:
-                    fallback_def = min_v
-
-                current_input_val = inst_data["inputs"].get(symbol, fallback_def)
+                current_input_val = inst_data["inputs"].get(symbol)
                 if is_linked and linked_value is not None:
                     current_input_val = linked_value
             else:
                 min_v, max_v, step_v = None, None, None
-                fallback_def = var.get(
-                    "default",
-                    opts[0] if opts else (False if widget_type in ("checkbox", "toggle") else [] if widget_type == "multiselect" else None)
-                )
-                current_input_val = inst_data["inputs"].get(symbol, fallback_def)
+                current_input_val = inst_data["inputs"].get(symbol)
 
             if widget_type == "slider":
                 slider_min = float(var.get("min", 0.0))
@@ -224,11 +198,13 @@ class Calculation:
                     disabled=is_linked
                 )
             elif widget_type == "selectbox":
-                default_idx = opts.index(current_input_val) if current_input_val in opts else 0
+                select_options = [None, *opts]
+                default_idx = select_options.index(current_input_val) if current_input_val in select_options else 0
                 val = st.sidebar.selectbox(
                     label=widget_label,
-                    options=opts,
+                    options=select_options,
                     index=default_idx,
+                    format_func=lambda option: "" if option is None else str(option),
                     help=help_text,
                     key=input_key,
                     disabled=is_linked
@@ -253,15 +229,18 @@ class Calculation:
                 )
             else:
                 # Default to number_input
-                try:
-                    num_val = float(current_input_val) if current_input_val is not None else (min_v if min_v is not None else 0.0)
-                except (ValueError, TypeError):
-                    num_val = min_v if min_v is not None else 0.0
+                if current_input_val is None:
+                    num_val = None
+                else:
+                    try:
+                        num_val = float(current_input_val)
+                    except (ValueError, TypeError):
+                        num_val = min_v if min_v is not None else 0.0
 
-                if min_v is not None and num_val < min_v:
-                    num_val = min_v
-                if max_v is not None and num_val > max_v:
-                    num_val = max_v
+                    if min_v is not None and num_val < min_v:
+                        num_val = min_v
+                    if max_v is not None and num_val > max_v:
+                        num_val = max_v
                 
                 val = st.sidebar.number_input(
                     label=widget_label,
@@ -269,6 +248,7 @@ class Calculation:
                     max_value=max_v,
                     value=num_val,
                     step=step_v,
+                    placeholder="Enter a value" if num_val is None else None,
                     help=help_text,
                     key=input_key,
                     disabled=is_linked
@@ -367,9 +347,16 @@ class Calculation:
         inputs = config["inputs"]
         precisions = config["precisions"]
 
+        def is_missing(value: Any) -> bool:
+            """Treat null, blank text, and empty collections as incomplete."""
+            return value is None or value == "" or (
+                isinstance(value, (list, tuple, set)) and not value
+            )
+
         missing_inputs = [
-            var["symbol"] for var in self.variables
-            if var.get("is_input", False) and inputs.get(var["symbol"]) is None
+            var["symbol"]
+            for var in self.variables
+            if var.get("is_input", False) and is_missing(inputs.get(var["symbol"]))
         ]
 
         if missing_inputs:
