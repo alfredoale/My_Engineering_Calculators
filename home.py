@@ -50,6 +50,12 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
                 })
 
     # Second Pass: Resolve linked variables and calculate outputs
+    for instance in active_instances:
+        inst_id = instance["instance_id"]
+        calc_key = instance["calc_key"]
+        label = instance["label"]
+        calc = CALCULATORS[calc_key]
+
         inst_data = calc_data_store.get(inst_id, {"inputs": {}, "linked": {}, "link_select": {}, "precisions": {}})
         inputs = dict(inst_data.get("inputs", {}))
         precisions = inst_data.get("precisions", {})
@@ -66,6 +72,9 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
         try:
             res = calc.calculate(inputs=inputs, precisions=precisions)
             for step in res.get("steps", []):
+                if "symbol" not in step or "result" not in step:
+                    continue
+
                 val = step.get("result")
                 p = step.get("precision", 2)
                 val_formatted = f"{val:.{p}f}" if isinstance(val, (int, float)) else str(val)
@@ -98,6 +107,9 @@ def main():
 
     if "calc_data" not in st.session_state:
         st.session_state["calc_data"] = {}
+
+    if "footer_accepted" not in st.session_state:
+        st.session_state["footer_accepted"] = False
 
     calc_data_store = st.session_state["calc_data"]
 
@@ -258,12 +270,34 @@ def main():
 if __name__ == "__main__":
     main()
 
-st.markdown("""
-    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; 
-        background-color: #f8f9fa; color: #212529; text-align: center;
-        padding: 10px 0; border-top: 1px solid #e9ecef; z-index: 999;">
-        By using this site, you agree to the <a href="" style="text-decoration: none; color: #007bff;">Terms and Conditions</a>. 
-        This site is licensed under the <a href="" style="text-decoration: none; color: #007bff;">MIT License</a>. 
-        Please review the <a href="" style="text-decoration: none; color: #007bff;">Privacy Policy</a>.
-    </footer>
-""", unsafe_allow_html=True)
+if not st.session_state.get("footer_accepted", False):
+    st.markdown("""
+        <style>
+        .st-key-consent-footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            padding: 10px 5%;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    with st.container(key="consent-footer"):
+        footer_text, footer_action = st.columns([6, 1], vertical_alignment="center")
+        with footer_text:
+            st.markdown("""
+                By using this site, you agree to the <a href="http://127.0.0.1:8503/"
+                style="text-decoration: none; color: #007bff;">Terms and Conditions</a>.
+                This site is licensed under the <a href="http://127.0.0.1:8503/"
+                style="text-decoration: none; color: #007bff;">MIT License</a>.
+                Please review the <a href="http://127.0.0.1:8503/"
+                style="text-decoration: none; color: #007bff;">Privacy Policy</a>.
+            """, unsafe_allow_html=True)
+        with footer_action:
+            if st.button("Accept", key="accept_footer", type="primary", use_container_width=True):
+                st.session_state["footer_accepted"] = True
+                st.rerun()

@@ -373,14 +373,16 @@ class Calculation:
                 st.subheader("Calculation Steps")
                 for step in result.get("steps", []):
                     st.markdown(f"**Step {step['step']}: {step['description']}**")
-                    st.caption("General Formula:")
-                    st.markdown(step["formula_general"])
-                    st.caption("Substituted Values:")
-                    st.markdown(step["formula_substituted"])
+                    if step.get("formula_general"):
+                        st.markdown(step["formula_general"])
+                    if step.get("formula_substituted"):
+                        st.markdown(step["formula_substituted"])
 
-                    p_res = step.get("precision", 2)
-                    unit_str = format_unit_latex(step.get("units", ""))
-                    st.markdown(rf"$${step['symbol']} = {step['result']:.{p_res}f}{unit_str}$$")
+                    if "symbol" in step and "result" in step:
+                        p_res = step.get("precision", 2)
+                        unit_str = format_unit_latex(step.get("units", ""))
+                        symbol_latex = step.get("latex", step["symbol"])
+                        st.markdown(rf"$${symbol_latex} = {step['result']:.{p_res}f}{unit_str}$$")
                     st.divider()
 
             st.subheader("Variables Reference")
