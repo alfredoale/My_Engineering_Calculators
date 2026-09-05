@@ -69,17 +69,17 @@ def calculate_maximum_floor_joist_span(inputs: dict, precisions: dict) -> dict:
     steps = [
         {
             "step": 1,
-            "description": "Identify the species group, lumber grade, and joist size",
+            "description": "Select the species group, lumber grade, and joist size",
             "formula_substituted": rf"$$\text{{Designation}} = \text{{{designation}}},\quad \text{{Grade}} = \text{{{grade}}},\quad \text{{Joist Size}} = {size_display}\text{{ mm}}$$"
         },
         {
             "step": 2,
-            "description": "Determine the lateral support arrangement and joist spacing",
+            "description": "Select the lateral support arrangement and joist spacing",
             "formula_substituted": rf"$$\text{{Restraint}} = \text{{{restraint}}},\quad \text{{Spacing}} = {joist_spacing}\text{{ mm}}$$"
         },
         {
             "step": 3,
-            "description": "Perform matrix lookup in OBC Table 9.23.4.2.-A",
+            "description": "Look up the maximum allowable joist span in OBC Table 9.23.4.2.-A",
             "symbol": "L_max",
             "latex": r"L_{max}",
             "result": span,

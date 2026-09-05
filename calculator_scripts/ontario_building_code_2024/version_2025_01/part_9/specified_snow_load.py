@@ -48,23 +48,21 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
     steps = [
         {
             "step": 1,
-            "description": f"Look up ground snow load (S_s) and rain load (S_r) for {location}",
-            "formula_general": r"$$S_s, S_r = \text{Lookup}(\text{Location})$$",
+            "description": f"Look up ground snow load ($S_s$) and rain load ($S_r$) for {location}",
             "formula_substituted": rf"$$\text{{Location}} = \text{{{location}}} \implies S_s = {ss:.{p_ss}f}\text{{ kPa}}, \quad S_r = {sr:.{p_sr}f}\text{{ kPa}}$$",
-            "symbol": rf"S_s = {ss:.{p_ss}f}\text{{ kPa}}, \quad S_r",
             "result": sr,
             "precision": p_sr,
             "units": "kPa"
         },
         {
             "step": 2,
-            "description": "Determine the basic roof snow-load factor",
+            "description": "Determine the basic roof snow load factor",
             "formula_general": r"$$C_b = \begin{cases} 0.45 & \text{if } w \le 4.3\text{ m} \\ 0.55 & \text{if } w > 4.3\text{ m} \end{cases}$$",
-            "formula_substituted": rf"$$C_b = {cb:.{p_cb}f} \quad \text{{(since }} w = {w:.{p_w}f}\text{{ m }} {cb_cond}\text{{)}}$$",
+            "formula_substituted": rf"$$\text{{(since }} w = {w:.{p_w}f}\text{{ m }} {cb_cond}\text{{)}}$$",
             "symbol": "C_b",
             "result": cb,
             "precision": p_cb,
-            "units": ""
+            "units": ""  # dimensionless
         },
         {
             "step": 3,
@@ -97,9 +95,9 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
 
 snow_load_variables = [
     {"symbol": "S", "latex": "S", "name": "Specified snow load", "units": "kPa", "is_input": False},
-    {"symbol": "Cb", "latex": "C_b", "name": "Basic roof snow-load factor", "units": "", "is_input": False},
-    {"symbol": "Ss", "latex": "S_s", "name": "Ground snow load", "units": "kPa", "is_input": False},
-    {"symbol": "Sr", "latex": "S_r", "name": "Rain load", "units": "kPa", "is_input": False},
+    {"symbol": "Cb", "latex": "C_b", "name": "Basic roof snow load factor", "units": "", "is_input": False},
+    {"symbol": "Ss", "latex": "S_s", "name": "1-in-50 year ground snow load", "units": "kPa", "is_input": False},
+    {"symbol": "Sr", "latex": "S_r", "name": "Associated 1-in-50 year rain load", "units": "kPa", "is_input": False},
     {
         "symbol": "Location",
         "latex": r"\text{Location}",
