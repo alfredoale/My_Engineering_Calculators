@@ -18,9 +18,11 @@ with DATA_FILE.open("r", encoding="utf-8") as file:
 
 
 def _normalise_joist_size(size: str) -> str:
+    """Normalize multiplication signs and whitespace for size comparisons."""
     return " ".join(size.replace("×", "x").split())
 
 
+# Normalize source values once so option lists and lookups use the same format.
 for row in floor_joist_spans:
     row["joistSize"]["value"] = _normalise_joist_size(row["joistSize"]["value"])
 
@@ -47,6 +49,7 @@ def calculate_maximum_floor_joist_span(inputs: dict, precisions: dict) -> dict:
     joist_spacing = int(inputs["joist_spacing"])
     restraint = str(inputs["restraint"])
 
+    # Every selected attribute must match one source-table row exactly.
     matching_row = next(
         (
             row

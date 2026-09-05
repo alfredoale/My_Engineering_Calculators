@@ -15,7 +15,7 @@ DATA_FILE = (
 with DATA_FILE.open("r", encoding="utf-8") as f:
     snow_rain_load_by_location = json.load(f)
 
-# Extract location options list and build lookup dictionary
+# Keep the selector values and calculation data derived from the same source rows.
 LOCATION_OPTIONS = [item["location"] for item in snow_rain_load_by_location]
 LOCATION_MAP = {
     item["location"]: {"Ss": float(item["Ss"]), "Sr": float(item["Sr"])}
@@ -24,10 +24,12 @@ LOCATION_MAP = {
 
 
 def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
-    """Executes OBC Part 9 Snow Load calculation using location database lookup."""
+    """Calculate specified roof snow load using the selected location's SB-1 data."""
     location = str(inputs["Location"])
     w = float(inputs["w"])
 
+    # The selector normally guarantees a known location; retain a neutral
+    # fallback so the calculation remains total if called programmatically.
     loc_data = LOCATION_MAP.get(location, {"Ss": 0.0, "Sr": 0.0})
     ss = loc_data["Ss"]
     sr = loc_data["Sr"]
@@ -38,6 +40,7 @@ def calculate_snow_load(inputs: dict, precisions: dict) -> dict:
     p_cb = precisions.get("Cb", 2)
     p_s = precisions.get("S", 2)
 
+    # OBC uses the roof-width threshold to select the basic roof snow factor.
     cb = 0.45 if w <= 4.3 else 0.55
     cb_cond = rf"\le 4.3\text{{ m}}" if w <= 4.3 else rf"> 4.3\text{{ m}}"
 

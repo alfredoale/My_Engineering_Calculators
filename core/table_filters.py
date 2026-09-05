@@ -15,6 +15,7 @@ def table_columns(records: list[dict[str, Any]]) -> list[str]:
 
 
 def column_values(records: list[dict[str, Any]], column: str) -> list[Any]:
+    """Return non-null values for a column, preserving their original order."""
     return [record[column] for record in records if record.get(column) is not None]
 
 
@@ -35,6 +36,7 @@ def sort_filter_options(values: list[Any]) -> list[Any]:
 
 
 def is_numeric_column(records: list[dict[str, Any]], column: str) -> bool:
+    """Return whether a non-empty column contains only numeric, non-boolean values."""
     values = column_values(records, column)
     return bool(values) and all(isinstance(value, Number) and not isinstance(value, bool) for value in values)
 
@@ -44,7 +46,13 @@ def filter_table_records(
     search: str = "",
     column_filters: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Filter records without changing the original list or its row objects."""
+    """
+    Return records matching the search text and every column criterion.
+
+    Search text matches any non-null value. Criteria may be inclusive ranges
+    represented by tuples, exact value sets, or case-insensitive substrings.
+    The input list and its row objects are left unchanged.
+    """
     normalized_search = search.strip().casefold()
     column_filters = column_filters or {}
 

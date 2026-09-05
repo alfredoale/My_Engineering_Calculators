@@ -109,8 +109,11 @@ class Calculation:
         calc_data_store: dict
     ) -> dict:
         """
-        Renders input controls for this calculator instance inside the sidebar.
-        Renders the main input control first, followed below by the variable linking controls.
+        Render this instance's inputs and return values for the current rerun.
+
+        Numeric inputs may be linked to a matching variable from another active
+        calculator. Linked values are used for calculation without overwriting
+        the local input, so disabling a link restores the user's last value.
         """
         inst_data = calc_data_store[instance_id]
         resolved_inputs = {}
@@ -142,7 +145,8 @@ class Calculation:
             linked_value = None
 
             if supports_linking:
-                # Filter matching candidate variables from other active instances
+                # A link is valid only while another active instance exposes the
+                # same unit. This also prevents stale links from surviving removal.
                 matching_candidates = [
                     v for v in available_vars 
                     if v["instance_id"] != instance_id  # Exclude self
@@ -150,7 +154,8 @@ class Calculation:
                 ]
                 has_candidates = len(matching_candidates) > 0
 
-                # Pre-evaluate toggle link status from session state
+                # Widget state wins on reruns; the persistent store supplies the
+                # initial value before Streamlit has created the widget state.
                 if toggle_key in st.session_state:
                     is_linked = bool(st.session_state[toggle_key]) and has_candidates
                 else:
@@ -158,7 +163,8 @@ class Calculation:
 
                 inst_data["linked"][symbol] = is_linked
 
-                # Determine selected linked variable value
+                # Resolve the selected source before rendering the control so the
+                # linked value can be used as the disabled input's displayed value.
                 candidate_options = [v["id"] for v in matching_candidates]
                 current_link_id = st.session_state.get(select_key, inst_data["link_select"].get(symbol))
 
@@ -284,6 +290,8 @@ class Calculation:
                     inst_data["linked"][symbol] = is_linked
 
                 with col_s:
+                    # Keep the source selection separate from the input widget;
+                    # this lets the link toggle change without losing the source.
                     candidate_options = [v["id"] for v in matching_candidates]
                     candidate_map = {v["id"]: v["display"] for v in matching_candidates}
 
@@ -306,7 +314,8 @@ class Calculation:
                         if selected_var is not None:
                             linked_value = selected_var["value"]
 
-            # Store resolved value
+            # Store only local values. A linked value is resolved transiently so
+            # unlinking returns to the value the user entered before linking.
             if is_linked and linked_value is not None:
                 resolved_inputs[symbol] = linked_value
             else:
@@ -339,7 +348,7 @@ class Calculation:
         return precisions
 
     def render_main_canvas(self, config: dict):
-        """Executes calculation logic and renders clean LaTeX step-by-step outputs on the main canvas."""
+        """Run the calculation and render its result, steps, references, and notes."""
         st.title(self.title)
         st.markdown(self.subtitle)
         instance_label = config.get("instance_label", "")
@@ -383,6 +392,7 @@ class Calculation:
                 filter_widget_keys = [f"{filter_key}_search"]
 
                 def persist_filter_value(widget_key: str, column: str | None):
+                    """Copy a changed filter widget into the instance filter state."""
                     state = st.session_state[filter_state_key]
                     value = st.session_state[widget_key]
                     if column is None:
@@ -391,6 +401,7 @@ class Calculation:
                         state["columns"][column] = value
 
                 def reset_table_filters():
+                    """Clear persisted filters and reset every filter widget."""
                     state = st.session_state[filter_state_key]
                     state["search"] = ""
                     state["columns"] = {}
@@ -398,6 +409,8 @@ class Calculation:
                         st.session_state[widget_key] = [] if widget_key != f"{filter_key}_search" else ""
 
                 with st.expander("Filter", expanded=False):
+                    # Seed widgets from persisted state once; subsequent reruns
+                    # read their values from session state through their keys.
                     search_key = f"{filter_key}_search"
                     if search_key not in st.session_state:
                         st.session_state[search_key] = filter_state["search"]

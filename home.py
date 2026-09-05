@@ -16,13 +16,14 @@ def format_instance_display(calc_title: str, label: str) -> str:
 
 def gather_available_variables(active_instances: list, calc_data_store: dict) -> list:
     """
-    Collects all current inputs and calculated outputs from all active calculator instances
-    formatted as selectable options for linked dropdowns.
-    Evaluates in two passes to resolve cross-linked variables reliably.
+    Collect current linkable inputs and calculated outputs from active instances.
+
+    The first pass exposes unlinked inputs as sources. The second pass applies
+    existing links, runs each calculator, and exposes numeric step results.
     """
     available_vars = []
 
-    # First Pass: Collect base inputs and initial outputs
+    # Expose only unlinked inputs; linked inputs are supplied by another source.
     for instance in active_instances:
         inst_id = instance["instance_id"]
         calc_key = instance["calc_key"]
@@ -38,7 +39,7 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
             if var.get("is_input", False):
                 sym = var["symbol"]
 
-                # Exclude variables that are currently linked to another variable
+                # Exclude variables that are currently linked to another variable.
                 if linked.get(sym, False):
                     continue
 
@@ -60,7 +61,7 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
                     "display": display_str
                 })
 
-    # Second Pass: Resolve linked variables and calculate outputs
+    # Apply links before calculating so dependent outputs use their current values.
     for instance in active_instances:
         inst_id = instance["instance_id"]
         calc_key = instance["calc_key"]
@@ -104,18 +105,21 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
                     "display": display_str
                 })
         except Exception:
+            # One incomplete calculator should not prevent other instances from
+            # contributing linkable variables to the sidebar.
             pass
 
     return available_vars
 
 
 def main():
+    """Render the calculator selector, active-instance controls, and main view."""
     st.set_page_config(page_title="My Engineering Calculators", layout="wide")
 
-    # Persistent storage across reruns and tab switches
+    # Streamlit reruns this script for widget interactions; retain instance data
+    # so inputs, links, notes, and display choices survive those reruns.
     if "active_instances" not in st.session_state:
         st.session_state["active_instances"] = []
-
     if "calc_data" not in st.session_state:
         st.session_state["calc_data"] = {}
 
@@ -192,7 +196,7 @@ def main():
         st.info("Please select a calculator or table and click **Add Calculator / Table** in the sidebar to begin.")
         return
 
-    # Ensure all active instances have session states initialized
+    # Initialize newly added instances without replacing existing user values.
     for inst in active_instances:
         calc = CALCULATORS[inst["calc_key"]]
         calc.initialize_session_state(inst["instance_id"], calc_data_store)

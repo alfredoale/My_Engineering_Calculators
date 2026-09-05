@@ -25,10 +25,12 @@ def discover_table_paths() -> list[Path]:
 
 
 def _relative_path(path: Path) -> str:
+    """Return a data-file path relative to the configured data root."""
     return path.relative_to(DATA_ROOT).as_posix()
 
 
 def _display_title(relative_path: str) -> str:
+    """Return the configured title or a readable title derived from the filename."""
     metadata = TABLE_METADATA.get(relative_path)
     if metadata:
         return metadata["title"]
@@ -38,11 +40,13 @@ def _display_title(relative_path: str) -> str:
 
 
 def _table_notes(relative_path: str) -> str:
+    """Return configured source notes or a generic note for an unlisted table."""
     metadata = TABLE_METADATA.get(relative_path)
     return metadata["notes"] if metadata else "Data loaded from the selected JSON file."
 
 
 def _flatten_record(value: dict[str, Any], prefix: str = "") -> dict[str, Any]:
+    """Flatten nested dictionaries into dot-separated table column names."""
     flattened = {}
     for key, nested_value in value.items():
         column = f"{prefix}.{key}" if prefix else key
@@ -54,7 +58,7 @@ def _flatten_record(value: dict[str, Any], prefix: str = "") -> dict[str, Any]:
 
 
 def load_table_records(relative_path: str) -> list[dict[str, Any]]:
-    """Load and flatten a JSON array or a single JSON object as table records."""
+    """Load a repository-relative JSON object or array and flatten its records."""
     path = DATA_ROOT / relative_path
     if path.parent != DATA_ROOT and DATA_ROOT not in path.parents:
         raise ValueError("Selected table is outside the data directory.")
@@ -71,7 +75,10 @@ def load_table_records(relative_path: str) -> list[dict[str, Any]]:
 
 
 TABLE_PATHS = discover_table_paths()
+
+
 def create_data_table_calculator(relative_path: str) -> Calculation:
+    """Create a calculator that loads one repository-relative JSON table."""
     table_title = f"(Table) {_display_title(relative_path)}"
 
     def calculate_table(inputs: dict, precisions: dict) -> dict:
