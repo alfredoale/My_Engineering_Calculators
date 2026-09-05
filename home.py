@@ -3,6 +3,17 @@ import streamlit as st
 from calculator_scripts import CALCULATORS
 
 
+def get_instance_label(instance: dict) -> str:
+    """Return a trimmed instance label, or an empty string when absent."""
+    label = instance.get("label", "")
+    return label.strip() if isinstance(label, str) else ""
+
+
+def format_instance_display(calc_title: str, label: str) -> str:
+    """Format a calculator title with its optional instance label."""
+    return f"{calc_title} ({label})" if label else calc_title
+
+
 def gather_available_variables(active_instances: list, calc_data_store: dict) -> list:
     """
     Collects all current inputs and calculated outputs from all active calculator instances
@@ -15,7 +26,7 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
     for instance in active_instances:
         inst_id = instance["instance_id"]
         calc_key = instance["calc_key"]
-        label = instance["label"]
+        label = get_instance_label(instance)
         calc = CALCULATORS[calc_key]
 
         inst_data = calc_data_store.get(inst_id, {"inputs": {}, "linked": {}, "link_select": {}, "precisions": {}})
@@ -36,7 +47,7 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
                 val_formatted = f"{val:.{p}f}" if isinstance(val, (int, float)) and not isinstance(val, bool) else str(val)
                 unit_str = var.get("units", "")
 
-                display_str = f"{sym} = {val_formatted} {unit_str} ({calc.title} - {label})".strip()
+                display_str = f"{sym} = {val_formatted} {unit_str} ({format_instance_display(calc.title, label)})".strip()
 
                 available_vars.append({
                     "id": f"{inst_id}_{sym}",
@@ -53,7 +64,7 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
     for instance in active_instances:
         inst_id = instance["instance_id"]
         calc_key = instance["calc_key"]
-        label = instance["label"]
+        label = get_instance_label(instance)
         calc = CALCULATORS[calc_key]
 
         inst_data = calc_data_store.get(inst_id, {"inputs": {}, "linked": {}, "link_select": {}, "precisions": {}})
@@ -80,7 +91,7 @@ def gather_available_variables(active_instances: list, calc_data_store: dict) ->
                 val_formatted = f"{val:.{p}f}" if isinstance(val, (int, float)) else str(val)
                 unit_str = step.get("units", "")
 
-                display_str = f"{step['symbol']} = {val_formatted} {unit_str} ({calc.title} - {label})".strip()
+                display_str = f"{step['symbol']} = {val_formatted} {unit_str} ({format_instance_display(calc.title, label)})".strip()
 
                 available_vars.append({
                     "id": f"{inst_id}_{step['symbol']}",
@@ -115,14 +126,14 @@ def main():
 
     st.sidebar.header("Calculator Settings")
 
-    st.sidebar.subheader("Add a Calculator")
+    st.sidebar.subheader("Add a Calculator / Table")
     
     selected_calc_key = st.sidebar.selectbox(
-        "Select Calculator Type",
+        "Select Calculator / Table",
         options=list(CALCULATORS.keys()),
         index=None,
-        placeholder="Select Calculator Type...",
-        help="Select an engineering calculator template to add.",
+        placeholder="Select Calculator or Table...",
+        help="Select an engineering calculator or data table to add.",
         key="calc_type_selector"
     )
 
@@ -137,12 +148,12 @@ def main():
     # Centered Add Calculator Button
     col_l, col_c, col_r = st.sidebar.columns([1, 2, 1])
     with col_c:
-        if st.button("Add Calculator", use_container_width=True):
+        if st.button("Add Calculator / Table", use_container_width=True):
             if not selected_calc_key:
-                st.sidebar.warning("Please select a calculator type first.")
+                st.sidebar.warning("Please select a calculator or table first.")
             else:
                 new_id = f"{selected_calc_key.replace(' ', '_').lower()}_{uuid.uuid4().hex[:6]}"
-                new_label = calc_label_input.strip() or f"Instance {len(st.session_state['active_instances']) + 1}"
+                new_label = calc_label_input.strip()
                 
                 st.session_state["active_instances"].append({
                     "instance_id": new_id,
@@ -159,12 +170,14 @@ def main():
     active_instances = st.session_state["active_instances"]
 
     if active_instances:
-        with st.sidebar.expander("Active Calculators List", expanded=False):
+        with st.sidebar.expander("Active Calculator / Table List", expanded=False):
             to_remove = []
             for idx, inst in enumerate(active_instances):
                 c_text, c_btn = st.columns([2, 1])
                 with c_text:
-                    st.caption(f"**{inst['label']}** ({inst['calc_key']})")
+                    label = get_instance_label(inst)
+                    display_name = f"**{label}** " if label else ""
+                    st.caption(f"{display_name}({inst['calc_key']})")
                 with c_btn:
                     if st.button("Remove", key=f"remove_{inst['instance_id']}", use_container_width=True):
                         to_remove.append(idx)
@@ -176,7 +189,7 @@ def main():
 
     if not active_instances:
         st.title("My Engineering Calculators")
-        st.info("Please select a calculator template, add a label, and click **Add Calculator** in the sidebar to begin.")
+        st.info("Please select a calculator or table and click **Add Calculator / Table** in the sidebar to begin.")
         return
 
     # Ensure all active instances have session states initialized
@@ -191,20 +204,23 @@ def main():
     current_idx = active_inst_ids.index(st.session_state["selected_instance_id"])
 
     calc_options_map = {
-        inst["instance_id"]: f"{CALCULATORS[inst['calc_key']].title} ({inst['label']})" 
+        inst["instance_id"]: format_instance_display(
+            CALCULATORS[inst["calc_key"]].title,
+            get_instance_label(inst)
+        )
         for inst in active_instances
     }
 
     st.sidebar.divider()
-    st.sidebar.subheader("Active Calculator")
+    st.sidebar.subheader("Active Calculator / Table")
     
     selected_inst_id = st.sidebar.selectbox(
-        "Select Active Calculator",
+        "Select Active Calculator / Table",
         options=active_inst_ids,
         index=current_idx,
         format_func=lambda x: calc_options_map[x],
         key="selected_instance_id",
-        help="Select which active calculator to view and edit."
+        help="Select which active calculator or table to view and edit."
     )
 
     selected_inst = next((inst for inst in active_instances if inst["instance_id"] == selected_inst_id), active_instances[0])
@@ -212,52 +228,61 @@ def main():
 
     # Edit label/identifier for the active calculator
     updated_label = st.sidebar.text_input(
-        "Edit Calculator Label",
-        value=selected_inst["label"],
+        "Edit Label",
+        value=get_instance_label(selected_inst),
         key=f"edit_label_{selected_inst_id}",
         help="Modify the label for this active calculator instance."
     )
-    if updated_label.strip() and updated_label.strip() != selected_inst["label"]:
-        selected_inst["label"] = updated_label.strip()
+    normalized_updated_label = updated_label.strip()
+    if normalized_updated_label != get_instance_label(selected_inst):
+        selected_inst["label"] = normalized_updated_label
         st.rerun()
 
-    available_vars = gather_available_variables(active_instances, calc_data_store)
+    selected_label = get_instance_label(selected_inst)
+    st.sidebar.markdown(f"**{format_instance_display(selected_calc.title, selected_label)}**")
 
-    st.sidebar.subheader("1. Variable Inputs")
-    st.sidebar.markdown(f"**{selected_calc.title} ({selected_inst['label']})**")
+    if selected_calc.is_table:
+        resolved_selected_inputs = {}
+        show_steps = False
+        selected_precisions = {}
+        calc_image = None
+        note_val = ""
+    else:
+        available_vars = gather_available_variables(active_instances, calc_data_store)
 
-    # Render inputs ONLY for selected calculator
-    resolved_selected_inputs = selected_calc.render_sidebar_inputs(
-        instance_id=selected_inst_id, 
-        instance_label=selected_inst["label"], 
-        available_vars=available_vars,
-        calc_data_store=calc_data_store
-    )
+        st.sidebar.subheader("1. Variable Inputs")
+        resolved_selected_inputs = selected_calc.render_sidebar_inputs(
+            instance_id=selected_inst_id,
+            instance_label=selected_label,
+            available_vars=available_vars,
+            calc_data_store=calc_data_store
+        )
 
-    st.sidebar.subheader("2. Visibility")
-    show_steps = st.sidebar.checkbox("Show calculation steps", value=True, key="show_steps_global")
+        st.sidebar.subheader("2. Visibility")
+        show_steps = st.sidebar.checkbox("Show calculation steps", value=True, key="show_steps_global")
 
-    st.sidebar.subheader("3. Precision")
-    with st.sidebar.expander("Precision Settings", expanded=False):
-        selected_precisions = selected_calc.render_sidebar_precisions(selected_inst_id, calc_data_store)
+        st.sidebar.subheader("3. Precision")
+        with st.sidebar.expander("Precision Settings", expanded=False):
+            selected_precisions = selected_calc.render_sidebar_precisions(selected_inst_id, calc_data_store)
 
-    st.sidebar.subheader("4. Reference Image")
-    calc_image = st.sidebar.file_uploader(
-        "Upload image",
-        type=["png", "jpg", "jpeg"],
-        key=f"img_{selected_inst_id}"
-    )
+        st.sidebar.subheader("4. Reference Image")
+        calc_image = st.sidebar.file_uploader(
+            "Upload image",
+            type=["png", "jpg", "jpeg"],
+            key=f"img_{selected_inst_id}"
+        )
 
-    st.sidebar.subheader("5. Notes")
-    note_val = st.sidebar.text_area(
-        "Notes",
-        value=calc_data_store[selected_inst_id].get("notes", ""),
-        key=f"textarea_{selected_inst_id}"
-    )
-    calc_data_store[selected_inst_id]["notes"] = note_val
+        st.sidebar.subheader("5. Notes")
+        note_val = st.sidebar.text_area(
+            "Notes",
+            value=calc_data_store[selected_inst_id].get("notes", ""),
+            key=f"textarea_{selected_inst_id}"
+        )
+        calc_data_store[selected_inst_id]["notes"] = note_val
 
     config = {
-        "instance_label": selected_inst["label"],
+        "instance_id": selected_inst_id,
+        "instance_label": selected_label,
         "inputs": resolved_selected_inputs,
         "show_steps": show_steps,
         "precisions": selected_precisions,

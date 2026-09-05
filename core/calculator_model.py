@@ -1,5 +1,12 @@
-from typing import Callable, List, Optional, Tuple
+from typing import Any, Callable, List, Optional, Tuple
 import streamlit as st
+
+from core.table_filters import (
+    column_values,
+    filter_table_records,
+    sort_filter_options,
+    table_columns,
+)
 
 
 def format_unit_latex(unit_str: str) -> str:
@@ -27,7 +34,8 @@ class Calculation:
         variables: List[dict],
         calculate_fn: Callable[[dict, dict], dict],
         code_custom_notes: str = "",
-        reference_link: Optional[Tuple[str, str]] = None
+        reference_link: Optional[Tuple[str, str]] = None,
+        is_table: bool = False
     ):
         self.calc_id = calc_id
         self.title = title
@@ -36,6 +44,7 @@ class Calculation:
         self.calculate_fn = calculate_fn
         self.code_custom_notes = code_custom_notes
         self.reference_link = reference_link  # Tuple format: ("Button Label", "URL")
+        self.is_table = is_table
 
     def calculate(self, inputs: dict, precisions: dict) -> dict:
         """Executes the core engineering logic using supplied inputs and precisions."""
@@ -333,10 +342,18 @@ class Calculation:
         """Executes calculation logic and renders clean LaTeX step-by-step outputs on the main canvas."""
         st.title(self.title)
         st.markdown(self.subtitle)
-        st.caption(config["instance_label"])
+        instance_label = config.get("instance_label", "")
+        if isinstance(instance_label, str):
+            instance_label = instance_label.strip()
+        else:
+            instance_label = ""
+
+        if instance_label:
+            st.caption(instance_label)
 
         if config["uploaded_image"] is not None:
-            st.image(config["uploaded_image"], caption=f"{self.title} ({config['instance_label']}) Reference Image", use_container_width=True)
+            image_caption = f"{self.title} ({instance_label}) Reference Image" if instance_label else f"{self.title} Reference Image"
+            st.image(config["uploaded_image"], caption=image_caption, use_container_width=True)
 
         inputs = config["inputs"]
         precisions = config["precisions"]
@@ -352,6 +369,93 @@ class Calculation:
 
         try:
             result = self.calculate(inputs=inputs, precisions=precisions)
+
+            if "dataframe_records" in result:
+                records = result["dataframe_records"]
+                instance_id = config.get("instance_id", self.calc_id)
+                filter_key = f"table_filters_{instance_id}"
+                filter_state_key = f"{filter_key}_state"
+                filter_state = st.session_state.setdefault(
+                    filter_state_key,
+                    {"search": "", "columns": {}},
+                )
+                column_filters: dict[str, Any] = {}
+                filter_widget_keys = [f"{filter_key}_search"]
+
+                def persist_filter_value(widget_key: str, column: str | None):
+                    state = st.session_state[filter_state_key]
+                    value = st.session_state[widget_key]
+                    if column is None:
+                        state["search"] = value
+                    else:
+                        state["columns"][column] = value
+
+                def reset_table_filters():
+                    state = st.session_state[filter_state_key]
+                    state["search"] = ""
+                    state["columns"] = {}
+                    for widget_key in filter_widget_keys:
+                        st.session_state[widget_key] = [] if widget_key != f"{filter_key}_search" else ""
+
+                with st.expander("Filter", expanded=False):
+                    search_key = f"{filter_key}_search"
+                    if search_key not in st.session_state:
+                        st.session_state[search_key] = filter_state["search"]
+                    search = st.text_input(
+                        "Search table values",
+                        label_visibility="collapsed",
+                        key=search_key,
+                        placeholder="Search table values",
+                        on_change=persist_filter_value,
+                        args=(search_key, None),
+                    )
+                    for column in table_columns(records):
+                        values = column_values(records, column)
+                        options = sort_filter_options(values)
+                        widget_key = f"{filter_key}_{column}"
+                        if widget_key not in st.session_state:
+                            st.session_state[widget_key] = filter_state["columns"].get(column, [])
+                        selected_values = st.multiselect(
+                            column,
+                            options=options,
+                            format_func=str,
+                            key=widget_key,
+                            on_change=persist_filter_value,
+                            args=(widget_key, column),
+                        )
+                        filter_widget_keys.append(widget_key)
+                        if selected_values:
+                            column_filters[column] = set(selected_values)
+
+                st.button(
+                    "Reset table filters",
+                    key=f"{filter_key}_reset",
+                    on_click=reset_table_filters,
+                )
+
+                filtered_records = filter_table_records(records, search, column_filters)
+                st.caption(f"Showing {len(filtered_records)} of {len(records)} rows")
+                st.dataframe(
+                    filtered_records,
+                    hide_index=True,
+                    use_container_width=True,
+                )
+                st.divider()
+                st.subheader("Notes")
+
+                if self.reference_link:
+                    btn_label, btn_url = self.reference_link
+                    st.link_button(btn_label, btn_url)
+
+                if self.code_custom_notes.strip():
+                    st.markdown(self.code_custom_notes)
+
+                if result.get("table_notes"):
+                    st.markdown(result["table_notes"])
+
+                if config["custom_notes"].strip():
+                    st.markdown(f"**Project Specific Notes:**  \n{config['custom_notes']}")
+                return
 
             st.subheader("Given")
             for var in self.variables:
