@@ -1,0 +1,319 @@
+{
+    "metadata": {
+        "title": "Table 4.1.5.3. | Specified Uniformly Distributed Live Loads on an Area of Floor or Roof",
+        "subtitle": "Forming Part of Sentence 4.1.5.3.(1)"
+    },
+    "data": [
+        {
+            "Use of Area of Floor or Roof": "Assembly Areas. (a) Except for the areas listed under (b), (c), (d) and (e), assembly areas with or without fixed seats including arenas⁽¹⁾ (areas without fixed seats that have backs), auditoria, churches (areas without fixed seats that have backs), dance floors, dining areas ⁽²⁾, foyers and entrance halls Grandstands⁽¹⁾ (areas without fixed seats that have backs), reviewing stands and bleachers, gymnasia, lecture halls⁽¹⁾ (areas without fixed seats that have backs), museums, promenades, rinks, stadia⁽¹⁾ (areas without fixed seats that have backs), stages, theatres (areas without fixed seats that have backs), and other areas with similar uses.",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Assembly Areas. (b) Classrooms and courtrooms with or without fixed seats⁽¹⁾.",
+            "Minimum Specified Load": {
+                "value": 2.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Assembly Areas. (c) Portions of assembly areas with fixed seats that have backs for the following uses: arenas⁽¹⁾, grandstands⁽¹⁾, and stadia⁽¹⁾.",
+            "Minimum Specified Load": {
+                "value": 2.9,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Assembly Areas. (d) Portions of assembly areas with fixed seats that have backs for the following uses: churches, lecture halls⁽¹⁾, and theatres.",
+            "Minimum Specified Load": {
+                "value": 2.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Assembly Areas. (e) Vomitories, exits, lobbies and corridors⁽¹⁾.",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Attics⁽¹⁾. Accessible by a stairway in residential occupancies only.",
+            "Minimum Specified Load": {
+                "value": 1.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Attics⁽¹⁾. Having limited accessibility so that there is no storage of equipment or material.",
+            "Minimum Specified Load": {
+                "value": 0.5,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Balconies. Exterior.",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Balconies. Interior and mezzanines that could be used by an assembly of people as a viewing area⁽¹⁾.",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Balconies. Interior and mezzanines other than above.",
+            "Minimum Specified Load": {
+                "value": null,
+                "unit": "kPa",
+                "note": "⁽³⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Corridors, lobbies and aisles⁽¹⁾. Other than those listed below.",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Corridors, lobbies and aisles⁽¹⁾. Not more than 1 200 mm in width and all upper floor corridors of residential areas only of apartments, hotels and motels (that cannot be used by an assembly of people as a viewing area).",
+            "Minimum Specified Load": {
+                "value": null,
+                "unit": "kPa",
+                "note": "⁽³⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Corridors, lobbies and aisles⁽¹⁾. In a Group B, Division 3 occupancy that contains sleeping accommodation for not more than 10 persons and not more  than 6 occupants require assistance in evacuation in case of an emergency.",
+            "Minimum Specified Load": {
+                "value": 2.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Equipment areas and service rooms including generator rooms, mechanical equipment exclusive of elevators, machine rooms, pump rooms, transformer vaults, and ventilating or air-conditioning equipment.",
+            "Minimum Specified Load": {
+                "value": 3.6,
+                "unit": "kPa",
+                "note": "⁽⁴⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Exits and fire escapes",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Factories",
+            "Minimum Specified Load": {
+                "value": 6,
+                "unit": "kPa",
+                "note": "⁽⁴⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Footbridges",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Garages for vehicles not exceeding 4 000 kg gross weight.",
+            "Minimum Specified Load": {
+                "value": 2.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Garages for vehicles exceeding 4 000 kg but not exceeding 9 000 kg gross weight.",
+            "Minimum Specified Load": {
+                "value": 6,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Garages for vehicles exceeding 9 000 kg gross weight⁽¹⁾.",
+            "Minimum Specified Load": {
+                "value": 12,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Kitchens (other than residential)",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Libraries. Stack rooms.",
+            "Minimum Specified Load": {
+                "value": 7.2,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Libraries. Reading and study rooms.",
+            "Minimum Specified Load": {
+                "value": 2.9,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Office areas⁽¹⁾ (not including record storage and computer rooms) located in basement, and floors, including mezzanines, with direct access to the exterior at ground level.",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Office areas⁽¹⁾ (not including record storage and computer rooms) located in other floors.",
+            "Minimum Specified Load": {
+                "value": 2.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Operating rooms and laboratories",
+            "Minimum Specified Load": {
+                "value": 3.6,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Patients' bedrooms",
+            "Minimum Specified Load": {
+                "value": 1.9,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Recreation areas that cannot be used for assembly purposes including billiard rooms, bowling alleys, and pool rooms.",
+            "Minimum Specified Load": {
+                "value": 3.6,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Residential areas (within the scope of Article 1.3.3.2. of Division A). Sleeping and living quarters in apartments, hotels, motels, boarding schools and colleges.",
+            "Minimum Specified Load": {
+                "value": 1.9,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Residential areas (within the scope of Article 1.3.3.2. of Division A). Work areas within live/work units.",
+            "Minimum Specified Load": {
+                "value": 2.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Residential areas (within the scope of Article 1.3.3.2. of Division A). Bedrooms, stairs within dwelling units and other areas.",
+            "Minimum Specified Load": {
+                "value": 1.9,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Retail and wholesale areas",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Roofs⁽¹⁾",
+            "Minimum Specified Load": {
+                "value": 1,
+                "unit": "kPa",
+                "note": "⁽⁵⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Sidewalks and driveways over areaways and basements⁽¹⁾",
+            "Minimum Specified Load": {
+                "value": 12,
+                "unit": "kPa",
+                "note": "⁽⁵⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Storage areas, including locker rooms in apartment buildings",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": "⁽⁴⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Toilet areas",
+            "Minimum Specified Load": {
+                "value": 2.4,
+                "unit": "kPa",
+                "note": null
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Underground slabs with earth cover",
+            "Minimum Specified Load": {
+                "value": null,
+                "unit": "kPa",
+                "note": "⁽⁵⁾"
+            }
+        },
+        {
+            "Use of Area of Floor or Roof": "Warehouses",
+            "Minimum Specified Load": {
+                "value": 4.8,
+                "unit": "kPa",
+                "note": "⁽⁴⁾"
+            }
+        }
+    ],
+    "table_notes": {
+        "1": "See Note A-Table 4.1.5.3.",
+        "2": "See Article 4.1.5.6.",
+        "3": "See Article 4.1.5.4.",
+        "4": "See Sentence 4.1.5.1.(1).",
+        "5": "See Article 4.1.5.5."
+    }
+}

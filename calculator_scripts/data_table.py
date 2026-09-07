@@ -7,18 +7,6 @@ from core.calculator_model import Calculation
 
 DATA_ROOT = Path(__file__).resolve().parents[1] / "data"
 
-TABLE_METADATA = {
-    "ontario_building_code_2024/version_2025_01/part_9/maximum_spans_floor_joists_general_cases.json": {
-        "title": "OBC Part 9 - Maximum Floor Joist Spans (General Cases)",
-        "notes": "Source data for OBC Table 9.23.4.2.-A maximum floor joist spans.",
-    },
-    "ontario_building_code_2024/version_2025_01/sb1_climatic_and_seismic_data/climatic_design_data_snow_load.json": {
-        "title": "OBC SB-1 - Climatic Design Data: Snow and Rain Loads",
-        "notes": "Source data for climatic design snow and rain loads in OBC Supplementary Standard SB-1.",
-    },
-}
-
-
 def discover_table_paths() -> list[Path]:
     """Return JSON data files in a stable, repository-relative order."""
     return sorted(DATA_ROOT.rglob("*.json"))
@@ -29,20 +17,39 @@ def _relative_path(path: Path) -> str:
     return path.relative_to(DATA_ROOT).as_posix()
 
 
-def _display_title(relative_path: str) -> str:
-    """Return the configured title or a readable title derived from the filename."""
-    metadata = TABLE_METADATA.get(relative_path)
-    if metadata:
-        return metadata["title"]
+def _load_table_payload(relative_path: str) -> dict[str, Any]:
+    """Load and validate the canonical wrapped table structure."""
+    path = DATA_ROOT / relative_path
+    if path.parent != DATA_ROOT and DATA_ROOT not in path.parents:
+        raise ValueError("Selected table is outside the data directory.")
 
-    filename = Path(relative_path).stem.replace("_", " ").replace("-", " ")
-    return " ".join(word.capitalize() for word in filename.split())
+    with path.open("r", encoding="utf-8") as file:
+        payload = json.load(file)
+
+    if not isinstance(payload, dict):
+        raise ValueError("The selected JSON file must contain a table object.")
+
+    metadata = payload.get("metadata")
+    rows = payload.get("data")
+    if not isinstance(metadata, dict) or not isinstance(metadata.get("title"), str):
+        raise ValueError("The table must contain metadata.title.")
+    if "subtitle" in metadata and metadata["subtitle"] is not None and not isinstance(metadata["subtitle"], str):
+        raise ValueError("metadata.subtitle must be a string when provided.")
+    if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
+        raise ValueError("The table data must be a list of objects.")
+
+    return payload
 
 
-def _table_notes(relative_path: str) -> str:
-    """Return configured source notes or a generic note for an unlisted table."""
-    metadata = TABLE_METADATA.get(relative_path)
-    return metadata["notes"] if metadata else "Data loaded from the selected JSON file."
+def _format_table_notes(notes: Any) -> str:
+    """Convert table notes into Markdown accepted by the table renderer."""
+    if isinstance(notes, dict):
+        return "\n".join(f"- **{key}:** {value}" for key, value in notes.items())
+    if isinstance(notes, str):
+        return notes
+    if notes is None:
+        return ""
+    raise ValueError("table_notes must be a string or object when provided.")
 
 
 def _flatten_record(value: dict[str, Any], prefix: str = "") -> dict[str, Any]:
@@ -58,20 +65,9 @@ def _flatten_record(value: dict[str, Any], prefix: str = "") -> dict[str, Any]:
 
 
 def load_table_records(relative_path: str) -> list[dict[str, Any]]:
-    """Load a repository-relative JSON object or array and flatten its records."""
-    path = DATA_ROOT / relative_path
-    if path.parent != DATA_ROOT and DATA_ROOT not in path.parents:
-        raise ValueError("Selected table is outside the data directory.")
-
-    with path.open("r", encoding="utf-8") as file:
-        data = json.load(file)
-
-    if isinstance(data, dict):
-        data = [data]
-    if not isinstance(data, list) or not all(isinstance(row, dict) for row in data):
-        raise ValueError("The selected JSON file must contain an object or an array of objects.")
-
-    return [_flatten_record(row) for row in data]
+    """Load canonical table rows and flatten nested row dictionaries."""
+    payload = _load_table_payload(relative_path)
+    return [_flatten_record(row) for row in payload["data"]]
 
 
 TABLE_PATHS = discover_table_paths()
@@ -79,19 +75,22 @@ TABLE_PATHS = discover_table_paths()
 
 def create_data_table_calculator(relative_path: str) -> Calculation:
     """Create a calculator that loads one repository-relative JSON table."""
-    table_title = f"(Table) {_display_title(relative_path)}"
+    metadata = _load_table_payload(relative_path)["metadata"]
+    table_title = f"(Table) {metadata['title']}"
+    table_subtitle = metadata.get("subtitle", "")
 
     def calculate_table(inputs: dict, precisions: dict) -> dict:
+        payload = _load_table_payload(relative_path)
         return {
-            "dataframe_records": load_table_records(relative_path),
+            "dataframe_records": [_flatten_record(row) for row in payload["data"]],
             "table_title": table_title,
-            "table_notes": _table_notes(relative_path),
+            "table_notes": _format_table_notes(payload.get("table_notes")),
         }
 
     return Calculation(
         calc_id=f"data_table_{relative_path.replace('/', '_').replace('.', '_')}",
         title=table_title,
-        subtitle="",
+        subtitle=table_subtitle,
         variables=[],
         calculate_fn=calculate_table,
         is_table=True,

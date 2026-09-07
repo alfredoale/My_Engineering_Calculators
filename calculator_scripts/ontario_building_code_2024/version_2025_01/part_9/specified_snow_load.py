@@ -13,7 +13,7 @@ DATA_FILE = (
 )
 
 with DATA_FILE.open("r", encoding="utf-8") as f:
-    snow_rain_load_by_location = json.load(f)
+    snow_rain_load_by_location = json.load(f)["data"]
 
 # Keep the selector values and calculation data derived from the same source rows.
 LOCATION_OPTIONS = [item["location"] for item in snow_rain_load_by_location]

@@ -1,4 +1,9 @@
-[
+{
+  "metadata": {
+    "title": "Table 2 | Climatic Design Data: Snow and Rain Loads",
+    "subtitle":null
+  },
+  "data": [
   {
     "location": "Ailsa Craig",
     "Ss": 2.2,
@@ -1397,4 +1402,6 @@
     "Sr": 0.4,
     "unit": "kPa"
   }
-]
+  ],
+  "table_notes": "Source data for climatic design snow and rain loads in OBC Supplementary Standard SB-1."
+}

@@ -14,7 +14,7 @@ DATA_FILE = (
 )
 
 with DATA_FILE.open("r", encoding="utf-8") as file:
-    floor_joist_spans = json.load(file)
+    floor_joist_spans = json.load(file)["data"]
 
 
 def _normalise_joist_size(size: str) -> str:
