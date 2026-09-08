@@ -368,6 +368,7 @@ class Calculation:
 
             if "dataframe_records" in result:
                 records = result["dataframe_records"]
+                table_column_titles = result.get("table_column_titles", {})
                 instance_id = config.get("instance_id", self.calc_id)
                 filter_key = f"table_filters_{instance_id}"
                 filter_state_key = f"{filter_key}_state"
@@ -416,7 +417,7 @@ class Calculation:
                         if widget_key not in st.session_state:
                             st.session_state[widget_key] = filter_state["columns"].get(column, [])
                         selected_values = st.multiselect(
-                            column,
+                            table_column_titles.get(column, column),
                             options=options,
                             format_func=str,
                             key=widget_key,
@@ -435,8 +436,15 @@ class Calculation:
 
                 filtered_records = filter_table_records(records, search, column_filters)
                 st.caption(f"Showing {len(filtered_records)} of {len(records)} rows")
+                column_config = {
+                    column: st.column_config.Column(
+                        label=table_column_titles.get(column, column)
+                    )
+                    for column in table_columns(records)
+                }
                 st.dataframe(
                     filtered_records,
+                    column_config=column_config,
                     hide_index=True,
                     use_container_width=True,
                 )

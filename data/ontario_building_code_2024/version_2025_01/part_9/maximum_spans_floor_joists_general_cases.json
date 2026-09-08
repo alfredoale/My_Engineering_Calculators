@@ -1,7 +1,18 @@
 {
   "metadata": {
     "title": "Table 9.23.4.2.-A | Maximum Spans for Floor Joists – General Cases⁽¹⁾",
-    "subtitle": "Forming Part of Sentences 9.23.2.8.(1), 9.23.4.2.(1) and (2), 9.23.4.4.(1) and 9.23.9.4.(1) to (3)"
+    "subtitle": "Forming Part of Sentences 9.23.2.8.(1), 9.23.4.2.(1) and (2), 9.23.4.4.(1) and 9.23.9.4.(1) to (3)",
+    "column_titles": {
+      "commercialDesignation": "Commercial Designation",
+      "grade": "Grade",
+      "joistSize.value": "Joist Size",
+      "joistSize.unit": "Joist Size Unit",
+      "lateralBracing": "Lateral Bracing",
+      "joistSpacing.value": "Joist Spacing",
+      "joistSpacing.unit": "Joist Spacing Unit",
+      "span.value": "Maximum Span",
+      "span.unit": "Maximum Span Unit"
+    }
   },
   "data": [
   {

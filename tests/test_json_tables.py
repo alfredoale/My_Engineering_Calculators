@@ -28,6 +28,7 @@ def test_all_data_files_use_wrapped_schema():
         payload = json.loads(path.read_text(encoding="utf-8"))
         assert isinstance(payload, dict)
         assert isinstance(payload["metadata"]["title"], str)
+        assert isinstance(payload["metadata"].get("column_titles", {}), dict)
         assert isinstance(payload["data"], list)
         assert all(isinstance(row, dict) for row in payload["data"])
 
@@ -39,6 +40,13 @@ def test_load_table_records_flattens_nested_rows():
     assert records[0]["Minimum Specified Load.value"] == 4.8
     assert records[0]["Minimum Specified Load.unit"] == "kPa"
     assert records[0]["Minimum Specified Load.note"] is None
+
+
+def test_table_calculator_includes_display_column_titles():
+    calculator = create_data_table_calculator(TABLE_PATHS[1])
+    result = calculator.calculate({}, {})
+
+    assert result["table_column_titles"]["joistSize.value"] == "Joist Size"
 
 
 def test_table_calculator_uses_json_metadata_and_notes():

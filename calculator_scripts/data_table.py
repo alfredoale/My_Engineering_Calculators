@@ -35,6 +35,12 @@ def _load_table_payload(relative_path: str) -> dict[str, Any]:
         raise ValueError("The table must contain metadata.title.")
     if "subtitle" in metadata and metadata["subtitle"] is not None and not isinstance(metadata["subtitle"], str):
         raise ValueError("metadata.subtitle must be a string when provided.")
+    column_titles = metadata.get("column_titles", {})
+    if not isinstance(column_titles, dict) or not all(
+        isinstance(column, str) and isinstance(title, str)
+        for column, title in column_titles.items()
+    ):
+        raise ValueError("metadata.column_titles must map strings to strings when provided.")
     if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
         raise ValueError("The table data must be a list of objects.")
 
@@ -83,6 +89,7 @@ def create_data_table_calculator(relative_path: str) -> Calculation:
         payload = _load_table_payload(relative_path)
         return {
             "dataframe_records": [_flatten_record(row) for row in payload["data"]],
+            "table_column_titles": payload["metadata"].get("column_titles", {}),
             "table_title": table_title,
             "table_notes": _format_table_notes(payload.get("table_notes")),
         }

@@ -1,7 +1,13 @@
 {
   "metadata": {
     "title": "Table 2 | Climatic Design Data: Snow and Rain Loads",
-    "subtitle":null
+    "subtitle":null,
+    "column_titles": {
+      "location": "Location",
+      "Ss": "1-in-50 year ground snow load, Ss",
+      "Sr": "Associated 1-in-50 year rain load, Sr",
+      "unit": "Unit"
+    }
   },
   "data": [
   {
