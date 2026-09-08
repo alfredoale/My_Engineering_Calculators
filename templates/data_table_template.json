@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "title": "Example Reference Table",
+    "subtitle": "Replace with the source document and table reference.",
+    "column_titles": {
+      "category": "Category",
+      "size.value": "Size",
+      "size.unit": "Size Unit",
+      "result.value": "Result",
+      "result.unit": "Result Unit"
+    }
+  },
+  "data": [
+    {
+      "category": "Example category",
+      "size": {
+        "value": "Example size",
+        "unit": "mm"
+      },
+      "result": {
+        "value": 0.0,
+        "unit": "kN"
+      }
+    }
+  ],
+  "table_notes": {
+    "Source": "Replace with the source, edition, and table number.",
+    "Scope": "Replace with assumptions, limitations, and applicability notes."
+  }
+}
