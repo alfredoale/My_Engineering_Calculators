@@ -63,9 +63,8 @@ wind_velocity_pressure_variables = [
 
 wind_velocity_pressure_notes = (
     "**Calculation Notes:**\n"
-    "- Standard reference: MMAH Supplementary Standard SB-1[span_0](start_span)[span_0](end_span).\n"
-    "- To convert wind speed from $\\text{km/h}$ to $\\text{m/s}$, divide the value in $\\text{km/h}$ by $3.6$.\n"
-    "  $$\\text{Speed (m/s)} = \\frac{\\text{Speed (km/h)}}{3.6}$$"
+    "- Standard reference: MMAH Supplementary Standard SB-1.\n"
+    "- To convert wind speed from $\\text{km/h}$ to $\\text{m/s}$, divide the value in $\\text{km/h}$ by $3.6$."
 )
 
 
