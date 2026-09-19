@@ -219,8 +219,6 @@ def main():
     if "selected_instance_id" not in st.session_state or st.session_state["selected_instance_id"] not in active_inst_ids:
         st.session_state["selected_instance_id"] = active_inst_ids[0]
 
-    current_idx = active_inst_ids.index(st.session_state["selected_instance_id"])
-
     calc_options_map = {
         inst["instance_id"]: format_instance_display(
             CALCULATORS[inst["calc_key"]].title,
@@ -235,7 +233,6 @@ def main():
     selected_inst_id = st.sidebar.selectbox(
         "Select Active Calculator / Table",
         options=active_inst_ids,
-        index=current_idx,
         format_func=lambda x: calc_options_map[x],
         key="selected_instance_id",
         help="Select which active calculator or table to view and edit."
