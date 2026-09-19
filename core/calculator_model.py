@@ -482,7 +482,7 @@ class Calculation:
             st.divider()
 
             if config["show_steps"]:
-                st.subheader("Calculation Steps")
+                st.subheader("Procedure")
                 for step in result.get("steps", []):
                     st.markdown(f"**Step {step['step']}: {step['description']}**")
                     if step.get("formula_general"):

@@ -325,6 +325,14 @@ if not st.session_state.get("footer_accepted", False):
             padding: 10px 5%;
             background-color: #f8f9fa;
             border-top: 1px solid #e9ecef;
+            color: #212529;
+        }
+        .st-key-consent-footer [data-testid="stMarkdownContainer"],
+        .st-key-consent-footer [data-testid="stMarkdownContainer"] p {
+            color: #212529 !important;
+        }
+        .st-key-consent-footer a {
+            color: #0056b3 !important;
         }
         </style>
     """, unsafe_allow_html=True)
