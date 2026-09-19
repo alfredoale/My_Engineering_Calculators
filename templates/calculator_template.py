@@ -96,11 +96,5 @@ example_calculator = Calculation(
 )
 
 
-# Register the calculator in calculator_scripts/__init__.py:
-#
-# from .your_package.your_module import example_calculator
-#
-# CALCULATORS = {
-#     ...,
-#     example_calculator.title: example_calculator,
-# }
+# Save this module inside a package under calculator_scripts/. Any Calculation
+# object defined here will be discovered automatically by the application.
