@@ -1,0 +1,413 @@
+{
+  "metadata": {
+    "title": "CAN/CSA-O86-01 | 5. Sawn Lumber | Specified Strengths and Modulus of Elasticity for Post and Timber Grades",
+    "subtitle": "Table 5.3.1D",
+    "column_titles": {
+      "species_identification": "Species identification",
+      "grade": "Grade",
+      "fb": "Bending at extreme fibre, fb",
+      "fv": "Longitudinal shear, fv",
+      "fc": "Compression Parallel to grain, fc",
+      "fcp": "Compression Perpendicular to grain, fcp",
+      "ft": "Tension parallel to grain, ft",
+      "E": "Modulus of elasticity, E",
+      "E05": "Modulus of elasticity, E05"
+    }
+  },
+  "data": [
+    {
+      "species_identification": "D Fir-L",
+      "grade": "SS",
+      "fb": {
+        "value": 18.3,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.5,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 13.8,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 10.7,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 12000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 8000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "D Fir-L",
+      "grade": "No. 1",
+      "fb": {
+        "value": 13.8,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.5,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 12.2,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 8.1,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 10500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 6500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "D Fir-L",
+      "grade": "No. 2",
+      "fb": {
+        "value": 6.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.5,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 7.5,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 3.8,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 9500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 6000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "SS",
+      "fb": {
+        "value": 13.6,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 11.3,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 7.9,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 10000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 7000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "No. 1",
+      "fb": {
+        "value": 10.2,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 10.0,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 6.0,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 9000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 6000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "No. 2",
+      "fb": {
+        "value": 4.5,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 6.1,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 2.8,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 8000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "SS",
+      "fb": {
+        "value": 12.7,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 9.9,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 7.4,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 8500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 6000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "No. 1",
+      "fb": {
+        "value": 9.6,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 8.7,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 5.6,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 7500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "No. 2",
+      "fb": {
+        "value": 4.2,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 5.4,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 2.6,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 6500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 4500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "SS",
+      "fb": {
+        "value": 12.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.0,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 7.5,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 8000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "No. 1",
+      "fb": {
+        "value": 9.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.0,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 6.7,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 7000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "No. 2",
+      "fb": {
+        "value": 3.9,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.0,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 4.1,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 2.5,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 6000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 4000,
+        "unit": "MPa"
+      }
+    }
+  ],
+  "table_notes": {
+    "(1)": "Posts and timbers have a smaller dimension of at least 114 mm, with a larger dimension not more than 51 mm greater than the smaller dimension.",
+    "(2)": "Posts and timbers graded to beam and stringer rules may be assigned beam and stringer strength.",
+    "(3)": "An approximate value for modulus of rigidity may be estimated at 0.065 times the modulus of elasticity.",
+    "(4)": "With sawn members thicker than 89 mm that season slowly, care should be exercised to avoid overloading in compression before appreciable seasoning of the outer fibre has taken place; otherwise, compression strengths for wet service conditions shall be used.",
+    "(5)": "Tabulated values are based on the following standard conditions:",
+    "(a)": "343 mm larger dimension for bending and shear, 292 mm larger dimension for tension and compression parallel to grain;",
+    "(b)": "dry service conditions; and",
+    "(c)": "standard-term duration of load."
+  }
+}

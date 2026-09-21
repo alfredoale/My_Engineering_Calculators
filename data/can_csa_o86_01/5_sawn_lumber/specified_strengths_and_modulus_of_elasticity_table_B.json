@@ -1,0 +1,282 @@
+{
+  "metadata": {
+    "title": "CAN/CSA-O86-01 | 5. Sawn Lumber | Specified Strengths and Modulus of Elasticity for Light Framing Grades (MPa) Applicable to Sizes 38 by 38 mm to 89 by 89 mm",
+    "subtitle": "Table 5.3.1B",
+    "column_titles": {
+      "species_identification": "Species identification",
+      "grade": "Grade",
+      "fb": "Bending at extreme fibre, fb",
+      "fv": "Longitudinal shear, fv",
+      "fc": "Compression Parallel to grain, fc",
+      "fcp": "Compression Perpendicular to grain, fcp",
+      "ft": "Tension parallel to grain, ft",
+      "E": "Modulus of elasticity, E",
+      "E05": "Modulus of elasticity, E05"
+    }
+  },
+  "data": [
+    {
+      "species_identification": "D Fir-L",
+      "grade": "Const.",
+      "fb": {
+        "value": 13.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 3.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 16.0,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 6.6,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 10000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "D Fir-L",
+      "grade": "Stand.",
+      "fb": {
+        "value": 7.3,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 3.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 13.1,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 3.7,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 9000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "Const.",
+      "fb": {
+        "value": 14.3,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 2.7,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 16.9,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 10000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 6000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "Stand.",
+      "fb": {
+        "value": 8.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 2.7,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 13.9,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 3.9,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 9000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "Const.",
+      "fb": {
+        "value": 15.3,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 2.6,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 13.1,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 6.2,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 9000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "Stand.",
+      "fb": {
+        "value": 8.6,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 2.6,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 10.8,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 8000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "Const.",
+      "fb": {
+        "value": 9.9,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 2.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 11.9,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 4.5,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 6500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 4000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "Stand.",
+      "fb": {
+        "value": 5.5,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 2.2,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 9.8,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 2.5,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 6000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 3500,
+        "unit": "MPa"
+      }
+    }
+  ],
+  "table_notes": {
+    "(1)": "The size factor $K_z$ for light framing grades shall be 1.00, except that $K_zc$ shall be calculated in accordance with Clause 5.5.6.2.2, and $K_zcp$ shall be determined in accordance with Clause 5.5.7.5.",
+    "(2)": "Tabulated values are based on the following standard conditions:",
+    "(a)": "89 mm width (except for compression properties);",
+    "(b)": "dry service conditions; and",
+    "(c)": "standard-term duration of load."
+  }
+}

@@ -1,0 +1,409 @@
+{
+  "metadata": {
+    "title": "CAN/CSA-O86-01 | 5. Sawn Lumber | Specified Strengths and Modulus of Elasticity for Structural Joist and Plank, Structural Light Framing, and Stud Grade Categories of Lumber",
+    "subtitle": "Table 5.3.1A",
+    "column_titles": {
+      "species_identification": "Species identification",
+      "grade": "Grade",
+      "fb": "Bending at extreme fibre, fb",
+      "fv": "Longitudinal shear, fv",
+      "fc": "Compression Parallel to grain, fc",
+      "fcp": "Compression Perpendicular to grain, fcp",
+      "ft": "Tension parallel to grain, ft",
+      "E": "Modulus of elasticity, E",
+      "E05": "Modulus of elasticity, E05"
+    }
+  },
+  "data": [
+    {
+      "species_identification": "D Fir-L",
+      "grade": "SS",
+      "fb": {
+        "value": 16.5,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.9,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 19.0,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 10.6,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 12500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 8500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "D Fir-L",
+      "grade": "No. 1/No. 2",
+      "fb": {
+        "value": 10.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.9,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 14.0,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 5.8,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 11000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 7000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "D Fir-L",
+      "grade": "No. 3/Stud",
+      "fb": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.9,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 2.1,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 10000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "SS",
+      "fb": {
+        "value": 16.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.6,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 17.6,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 9.7,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 12000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 8500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "No. 1/No. 2",
+      "fb": {
+        "value": 11.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.6,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 14.8,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 6.2,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 11000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 7500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Hem-Fir",
+      "grade": "No. 3/Stud",
+      "fb": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.6,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 4.6,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 3.2,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 10000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 6000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "SS",
+      "fb": {
+        "value": 16.5,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.5,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 14.5,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 8.6,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 10500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 7500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "No. 1/No. 2",
+      "fb": {
+        "value": 11.8,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.5,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 11.5,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 5.5,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 9500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 6500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "S-P-F",
+      "grade": "No. 3/Stud",
+      "fb": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.5,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 7.0,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 5.3,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 3.2,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 9000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "SS",
+      "fb": {
+        "value": 10.6,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.3,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 13.0,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 6.2,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 7500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5500,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "No. 1/No. 2",
+      "fb": {
+        "value": 7.6,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.3,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 10.4,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 4.0,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 7000,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 5000,
+        "unit": "MPa"
+      }
+    },
+    {
+      "species_identification": "Northern",
+      "grade": "No. 3/Stud",
+      "fb": {
+        "value": 4.5,
+        "unit": "MPa"
+      },
+      "fv": {
+        "value": 1.3,
+        "unit": "MPa"
+      },
+      "fc": {
+        "value": 4.5,
+        "unit": "MPa"
+      },
+      "fcp": {
+        "value": 3.5,
+        "unit": "MPa"
+      },
+      "ft": {
+        "value": 2.0,
+        "unit": "MPa"
+      },
+      "E": {
+        "value": 6500,
+        "unit": "MPa"
+      },
+      "E05": {
+        "value": 4000,
+        "unit": "MPa"
+      }
+    }
+  ],
+  "table_notes": {
+    "Note": "Tabulated values are based on the following standard conditions:",
+    "(a)": "286 mm larger dimension;",
+    "(b)": "dry service conditions; and",
+    "(c)": "standard-term duration of load."
+  }
+}

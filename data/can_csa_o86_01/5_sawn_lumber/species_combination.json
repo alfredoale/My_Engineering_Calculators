@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "title": "Table 5.2.1.2 | Species Combinations",
+    "subtitle": "CAN/CSA-O86-01 | 5. Sawn Lumber",
+    "column_titles": {
+      "species": "Species Combinations",
+      "identification": "Stamp identification",
+      "note": "Species included in the combination"
+    }
+  },
+  "data": [
+    {
+      "species": "Douglas Fir-Larch",
+      "identification": "D Fir-L (N)",
+      "note": "Douglas Fir, Western Larch"
+    },
+        {
+      "species": "Hem-Fir",
+      "identification": "Hem-Fir (N)",
+      "note": "Pacific Coast Hemlock, Amabilis Fir"
+    },
+        {
+      "species": "Spruce-Pine-Fir",
+      "identification": "Spruce-Pine-Fir",
+      "note": "Spruce (all species except Coast Sitka Spruce), Jack Pine, Lodgepole Pine, Balsam Fir, Alpine Fir"
+    },
+    {
+      "species": "Northern Species",
+      "identification": "Northern Species",
+      "note": "Any Canadian species graded in accordance with the NLGA rules"
+    }
+  ],
+  "table_notes": {
+    "1": "Names of species in this Table are standard commercial names. Additional information on botanical names and other common names is given in CSA Standard CAN/CSA-O141.",
+    "2": "The NLGA Standard Grading Rules for Canadian Lumber contains many species designations not shown in this Table. If the species can be identified, however, it may be possible to group it in one of the species combinations, for purposes of assigning specified strengths."
+  }
+}

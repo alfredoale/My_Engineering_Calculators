@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "title": "Table 4.3.2.2 | Load Duration Factor, KD",
+    "subtitle": "CAN/CSA-O86-01 | 4. General Design",
+    "column_titles": {
+      "category": "Duration of loading",
+      "KD.value": "KD",
+      "note": "Explanatory Notes"
+    }
+  },
+  "data": [
+    {
+      "category": "Short term",
+      "KD": {
+        "value": 1.15,
+        "unit": null
+      },
+      "note": "Short-term loading means that condition of loading where the duration of the specified loads is not expected to last more than 7 days continuously or cumulatively throughout the life of the structure. Examples include wind loads, earthquake loads, falsework, and formwork, as well as impact loads."
+    },
+    {
+      "category": "Standard term",
+      "KD": {
+        "value": 1.00,
+        "unit": null
+      },
+      "note": "Standard term means that condition of loading where the duration of specified loads exceeds that of short-term loading, but is less than permanent loading. Examples include snow loads, live loads due to occupancy, wheel loads on bridges, and dead loads in combination with all of the above."
+    },
+    {
+      "category": "Permanent",
+      "KD": {
+        "value": 0.65,
+        "unit": null
+      },
+      "note": "Permanent duration means that condition of loading under which a member is subjected to more or less continuous specified load. Examples include dead loads or dead loads plus live loads of such character that they are imposed on the member for as long a period of time as the dead loads themselves. Such loads include those usually occurring in tanks or bins containing fluids or granular material, loads on retaining walls subjected to lateral pressure such as earth, and floor loads where the specified load may be expected to be continuously applied, such as those in buildings for storage of bulk materials. Loads due to fixed machinery should be considered to be permanent."
+    }
+  ],
+  "table_notes": {
+    "Note": "Duration of load may require professional judgment by the designer. Explanatory notes in this table provide guidance to designers about the types of loads and load combinations for which each modification factor should be applied."
+  }
+}
